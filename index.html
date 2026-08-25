@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每草堂 · 健康沙龙运营赋能平台商业方案</title>
+<meta name="description" content="每草堂健康沙龙运营赋能平台商业方案 — 从「会办一场沙龙」到「持续经营客户资产」">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   每草堂 · 健康沙龙运营赋能平台
+   Swiss Precision / IKB Klein Blue
+   ============================================================ */
+:root{
+  /* IKB Klein Blue 基底 */
+  --ikb:        oklch(48% 0.22 265);
+  --ikb-deep:   oklch(38% 0.19 265);
+  --ikb-ink:    oklch(28% 0.14 265);
+  --ikb-bright: oklch(70% 0.16 265);
+  --ikb-tint:   oklch(16% 0.025 265);
+
+  /* 石墨背景 (带蓝色倾向的中性) */
+  --bg-0: oklch(13% 0.012 265);
+  --bg-1: oklch(17% 0.016 265);
+  --bg-2: oklch(22% 0.018 265);
+  --bg-3: oklch(27% 0.02 265);
+
+  /* 文字 */
+  --text-hi:  oklch(93% 0.008 80);
+  --text-mid: oklch(78% 0.012 80);
+  --text-low: oklch(64% 0.014 80);
+
+  /* 线条 */
+  --line: oklch(55% 0.03 265 / 0.18);
+
+  --font-display: "Archivo", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  --font-body: "Instrument Sans", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+  --space-9: 96px; --space-10: 128px;
+  --gutter: clamp(20px, 5vw, 64px);
+  --container: 1240px;
+}
+
+*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; }
+body{
+  background: var(--bg-0);
+  color: var(--text-hi);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+::selection{ background: var(--ikb); color:#fff; }
+img{ max-width:100%; display:block; }
+
+/* ---------- 顶部进度条 ---------- */
+#progress{
+  position: fixed; top:0; left:0; height:3px; width:0%;
+  background: var(--ikb-bright); z-index:60;
+  transition: width .1s linear;
+}
+
+/* ---------- 顶部导航 ---------- */
+.nav{
+  position: fixed; inset:0 0 auto 0; z-index:50;
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 18px var(--gutter);
+  background: color-mix(in oklch, var(--bg-0) 82%, transparent);
+  backdrop-filter: blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav .brand{ display:flex; align-items:baseline; gap:10px; }
+.nav .brand b{
+  font-family: var(--font-display); font-weight:800; font-size:1.1rem;
+  letter-spacing:.14em;
+}
+.nav .brand b em{ color:var(--ikb-bright); font-style:normal; }
+.nav .brand span{
+  font-family: var(--font-display); font-weight:600; font-size:.62rem;
+  letter-spacing:.34em; color:var(--text-low); text-transform:uppercase;
+}
+.nav .links{ display:flex; gap:26px; }
+.nav .links a{
+  color:var(--text-mid); text-decoration:none; font-size:.8rem;
+  letter-spacing:.08em; font-weight:500; padding:6px 0; position:relative;
+  transition:color .2s;
+}
+.nav .links a::after{
+  content:""; position:absolute; left:0; bottom:0; height:2px; width:0%;
+  background:var(--ikb-bright); transition:width .25s cubic-bezier(.22,1,.36,1);
+}
+.nav .links a:hover{ color:var(--text-hi); }
+.nav .links a:hover::after{ width:100%; }
+.nav .cta{
+  font-family:var(--font-display); font-weight:700; font-size:.78rem;
+  letter-spacing:.06em; color:#fff; text-decoration:none;
+  background:var(--ikb); padding:10px 20px; border:1px solid var(--ikb-bright);
+  transition:background .2s, transform .2s;
+}
+.nav .cta:hover{ background:var(--ikb-bright); transform:translateY(-1px); }
+.menu-toggle{ display:none; }
+
+/* ---------- 通用容器 ---------- */
+.wrap{ width:100%; max-width:var(--container); margin:0 auto; padding:0 var(--gutter); }
+
+/* ---------- Hero ---------- */
+.hero{
+  position:relative; min-height:100vh; display:flex; align-items:center;
+  padding: 160px 0 90px; overflow:hidden;
+}
+/* 几何网格背景 */
+.hero::before{
+  content:""; position:absolute; inset:0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 88px 88px;
+  mask-image: radial-gradient(ellipse 90% 80% at 60% 40%, #000 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 60% 40%, #000 20%, transparent 75%);
+}
+.hero::after{
+  content:""; position:absolute; width:46vw; height:46vw; max-width:640px; max-height:640px;
+  right:-8%; top:-18%; background: var(--ikb);
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  opacity:.16;
+}
+.hero .wrap{ position:relative; z-index:2; }
+.eyebrow{
+  display:inline-flex; align-items:center; gap:12px;
+  font-family:var(--font-display); font-weight:600; font-size:.72rem;
+  letter-spacing:.32em; text-transform:uppercase; color:var(--ikb-bright);
+  margin-bottom: var(--space-6);
+}
+.eyebrow::before{ content:""; width:44px; height:2px; background:var(--ikb-bright); }
+.hero h1{
+  font-family:var(--font-display); font-weight:900;
+  font-size: clamp(2.9rem, 8vw, 6.4rem);
+  line-height: 1.02; letter-spacing:-.02em;
+  max-width: 14ch;
+}
+.hero h1 .blue{ color:var(--ikb-bright); }
+.hero .sub{
+  margin-top: var(--space-6);
+  font-size: clamp(1.05rem, 2.2vw, 1.4rem);
+  color:var(--text-mid); font-weight:400; max-width: 44ch;
+  line-height:1.65;
+}
+.hero .sub b{ color:var(--text-hi); font-weight:600; }
+
+/* Hero 关键数据条 */
+.hero-stats{
+  margin-top: var(--space-8);
+  display:grid; grid-template-columns: repeat(4, 1fr);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.hero-stat{
+  padding: var(--space-5) var(--space-4); border-right:1px solid var(--line);
+}
+.hero-stat:last-child{ border-right:none; }
+.hero-stat .num{
+  font-family:var(--font-display); font-weight:800;
+  font-size: clamp(2rem, 4.5vw, 3.4rem); line-height:1;
+  color:var(--text-hi); font-variant-numeric: tabular-nums;
+}
+.hero-stat .num i{ font-style:normal; color:var(--ikb-bright); }
+.hero-stat .lbl{
+  margin-top: var(--space-2); font-size:.74rem; letter-spacing:.14em;
+  color:var(--text-low); text-transform:uppercase;
+}
+.hero-scroll{
+  position:absolute; bottom:28px; left:var(--gutter); z-index:2;
+  font-family:var(--font-display); font-size:.66rem; letter-spacing:.34em;
+  color:var(--text-low); text-transform:uppercase;
+  display:flex; align-items:center; gap:12px;
+}
+.hero-scroll::after{
+  content:""; width:56px; height:1px; background:var(--text-low);
+  position:relative; overflow:hidden;
+}
+.hero-scroll::before{
+  content:""; position:absolute; left:68px; top:-2px; width:8px; height:5px;
+  background:var(--ikb-bright); animation:drop 1.8s cubic-bezier(.65,0,.35,1) infinite;
+}
+@keyframes drop{ 0%{ transform:translateY(0); opacity:1;} 100%{ transform:translateY(18px); opacity:0;} }
+
+/* ---------- Section 通用 ---------- */
+section{ position:relative; }
+.sec{ padding: var(--space-10) 0; }
+.sec-head{
+  display:grid; grid-template-columns: 120px 1fr; gap: var(--space-6);
+  margin-bottom: var(--space-8); align-items:start;
+}
+.sec-no{
+  font-family:var(--font-display); font-weight:800; font-size: clamp(1.4rem,3vw,2rem);
+  color:var(--ikb-bright); letter-spacing:.02em; line-height:1;
+  display:flex; align-items:baseline; gap:8px;
+}
+.sec-no small{
+  font-size:.7rem; font-weight:600; color:var(--text-low); letter-spacing:.28em;
+}
+.sec-title{
+  font-family:var(--font-display); font-weight:800;
+  font-size: clamp(1.7rem, 4vw, 2.9rem); line-height:1.15; letter-spacing:-.01em;
+}
+.sec-title .thin{ font-weight:400; color:var(--text-mid); }
+.sec-desc{
+  margin-top: var(--space-4); color:var(--text-mid);
+  max-width: 62ch; font-size:1.02rem;
+}
+.sec-desc b{ color:var(--text-hi); font-weight:600; }
+.alt-bg{ background:var(--bg-1); }
+
+/* ---------- 摘要 ---------- */
+.summary-grid{
+  display:grid; grid-template-columns: 1.2fr 1fr; gap: var(--space-8);
+  align-items:start;
+}
+.summary-lead{
+  font-size: clamp(1.15rem, 2.4vw, 1.5rem); line-height:1.7;
+  font-weight:500; color:var(--text-hi);
+}
+.summary-lead em{
+  font-style:normal; color:var(--ikb-bright); font-family:var(--font-display);
+  font-weight:700;
+}
+.summary-extra{
+  display:grid; gap: var(--space-4);
+}
+.summary-line{
+  display:flex; gap: var(--space-4); align-items:flex-start;
+  padding: var(--space-4) 0; border-bottom:1px solid var(--line);
+}
+.summary-line .tag{
+  font-family:var(--font-display); font-weight:700; font-size:.68rem;
+  letter-spacing:.18em; color:var(--ikb-bright); text-transform:uppercase;
+  min-width:6em; padding-top:5px;
+}
+.summary-line p{ color:var(--text-mid); font-size:.95rem; }
+.summary-line p b{ color:var(--text-hi); }
+
+/* ---------- 定位 ---------- */
+.pos-grid{
+  display:grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5);
+}
+.pos-card{
+  position:relative; padding: var(--space-6); background:var(--bg-2);
+  border-left:3px solid var(--ikb);
+  transition: transform .3s cubic-bezier(.22,1,.36,1), background .3s;
+}
+.pos-card:hover{ transform:translateY(-6px); background:var(--bg-3); }
+.pos-card .k{
+  font-family:var(--font-display); font-weight:800; font-size:.7rem;
+  letter-spacing:.22em; color:var(--text-low); text-transform:uppercase;
+}
+.pos-card h3{
+  font-family:var(--font-display); font-weight:700; font-size:1.22rem;
+  margin: var(--space-3) 0 var(--space-3);
+}
+.pos-card p{ color:var(--text-mid); font-size:.92rem; }
+.pos-banner{
+  margin-top: var(--space-7); padding: var(--space-6) var(--space-7);
+  background:var(--ikb); display:flex; align-items:center; gap: var(--space-6);
+}
+.pos-banner .big{
+  font-family:var(--font-display); font-weight:900;
+  font-size: clamp(1.6rem,3.6vw,2.6rem); line-height:1.1; flex:1;
+}
+.pos-banner .big small{ display:block; font-weight:600; font-size:.78rem; letter-spacing:.2em; opacity:.75; margin-bottom:6px; }
+.pos-banner .line{ width:1px; align-self:stretch; background:rgba(255,255,255,.35); }
+.pos-banner .note{ flex:1; font-size:.92rem; opacity:.92; }
+
+/* ---------- 痛点 ---------- */
+.pain-list{ display:grid; grid-template-columns: repeat(2,1fr); gap:0; }
+.pain-item{
+  padding: var(--space-6) var(--space-6) var(--space-6) 0;
+  border-top:1px solid var(--line);
+  display:grid; grid-template-columns: 84px 1fr; gap: var(--space-5);
+  position:relative;
+}
+.pain-item:nth-child(odd){ padding-right: var(--space-7); }
+.pain-item .idx{
+  font-family:var(--font-display); font-weight:800; font-size:2.4rem;
+  color:transparent; -webkit-text-stroke:1px var(--text-low);
+  line-height:1; letter-spacing:.02em; font-variant-numeric: tabular-nums;
+}
+.pain-item h4{
+  font-family:var(--font-display); font-weight:700; font-size:1.05rem;
+  margin-bottom:6px; letter-spacing:.01em;
+}
+.pain-item h4 .bar{ color:var(--ikb-bright); margin-right:6px; }
+.pain-item p{ color:var(--text-mid); font-size:.9rem; }
+
+/* ---------- 为什么切入 ---------- */
+.why-grid{
+  display:grid; grid-template-columns: repeat(2,1fr); gap: var(--space-5);
+}
+.why-card{
+  padding: var(--space-6); background:var(--bg-2); border:1px solid transparent;
+  position:relative; overflow:hidden;
+  transition: border-color .3s, transform .3s;
+}
+.why-card::before{
+  content:""; position:absolute; top:0; right:0; width:64px; height:64px;
+  background:var(--ikb); clip-path: polygon(100% 0, 0 0, 100% 100%); opacity:.22;
+}
+.why-card:hover{ border-color:var(--ikb); transform:translateY(-4px); }
+.why-card .n{
+  font-family:var(--font-display); font-weight:900; font-size:3rem; line-height:1;
+  color:var(--ikb-bright); font-variant-numeric: tabular-nums;
+}
+.why-card h3{ font-family:var(--font-display); font-weight:700; font-size:1.2rem; margin:var(--space-4) 0 var(--space-3); }
+.why-card p{ color:var(--text-mid); font-size:.92rem; }
+
+/* ---------- 目标客户 ---------- */
+.client-table{ width:100%; border-collapse:collapse; }
+.client-table thead th{
+  font-family:var(--font-display); font-weight:700; font-size:.72rem;
+  letter-spacing:.2em; text-transform:uppercase; color:var(--text-low);
+  text-align:left; padding: var(--space-4) var(--space-4);
+  border-bottom:2px solid var(--ikb-bright);
+}
+.client-table tbody td{
+  padding: var(--space-5) var(--space-4); border-bottom:1px solid var(--line);
+  vertical-align:top; font-size:.93rem;
+}
+.client-table tbody tr{ transition:background .25s; }
+.client-table tbody tr:hover{ background:var(--bg-2); }
+.client-table td.type{
+  font-family:var(--font-display); font-weight:700; color:var(--text-hi);
+  white-space:nowrap; font-size:.98rem;
+}
+.client-table td.cur{ color:var(--text-mid); }
+.client-table td.help{ color:var(--text-hi); }
+.client-table td.help::before{ content:"→"; color:var(--ikb-bright); font-weight:700; margin-right:8px; }
+
+/* ---------- 价值主张 ---------- */
+.value-band{
+  position:relative; background: var(--ikb);
+  padding: var(--space-9) 0; overflow:hidden;
+}
+.value-band::after{
+  content:""; position:absolute; right:-4%; bottom:-22%; width:420px; height:420px;
+  border:1px solid rgba(255,255,255,.28); border-radius:50%;
+  box-shadow: 0 0 0 44px rgba(255,255,255,.06), 0 0 0 88px rgba(255,255,255,.04);
+}
+.value-band .wrap{ position:relative; z-index:2; }
+.value-band .vh{
+  font-family:var(--font-display); font-weight:900;
+  font-size: clamp(1.6rem,4vw,2.8rem); line-height:1.15; max-width:18ch;
+  margin-bottom: var(--space-7);
+}
+.value-grid{ display:grid; grid-template-columns: repeat(4,1fr); gap: var(--space-5); }
+.value-cell{
+  padding-top: var(--space-5); border-top:2px solid rgba(255,255,255,.85);
+}
+.value-cell .ico{
+  font-family:var(--font-display); font-weight:900; font-size:1.8rem; line-height:1;
+  margin-bottom: var(--space-4); color:rgba(255,255,255,.9);
+}
+.value-cell h3{ font-family:var(--font-display); font-weight:800; font-size:1.12rem; margin-bottom:8px; }
+.value-cell p{ font-size:.86rem; opacity:.85; }
+
+/* 增长链路 */
+.chain{
+  margin-top: var(--space-8); display:flex; flex-wrap:wrap; gap: 10px 0;
+  align-items:center;
+}
+.chain span{
+  font-family:var(--font-display); font-weight:600; font-size:.82rem;
+  padding: 10px 16px; background:var(--bg-2); border:1px solid var(--line);
+  white-space:nowrap;
+}
+.chain .sep{
+  font-family:var(--font-display); font-weight:800; color:var(--ikb-bright);
+  padding: 0 8px; font-size:1rem;
+}
+.chain-note{
+  margin-top: var(--space-4); font-family:var(--font-display); font-weight:700;
+  font-size:.72rem; letter-spacing:.24em; color:var(--text-low); text-transform:uppercase;
+}
+
+/* ---------- 三层产品 ---------- */
+.tier-stack{ display:grid; gap: var(--space-6); counter-reset:tier; }
+.tier{
+  position:relative; display:grid; grid-template-columns: 200px 1fr;
+  background:var(--bg-2); border-left:4px solid var(--ikb);
+  transition:transform .3s cubic-bezier(.22,1,.36,1);
+}
+.tier:hover{ transform:translateX(8px); }
+.tier .tier-no{
+  font-family:var(--font-display); font-weight:900;
+  font-size: clamp(3rem,6vw,4.6rem); line-height:1; color:transparent;
+  -webkit-text-stroke:1px var(--ikb-bright);
+  display:flex; align-items:flex-start; padding: var(--space-6);
+}
+.tier .tier-body{ padding: var(--space-6) var(--space-6) var(--space-6) 0; }
+.tier .lvl{
+  font-family:var(--font-display); font-weight:700; font-size:.72rem;
+  letter-spacing:.26em; color:var(--ikb-bright); text-transform:uppercase;
+}
+.tier h3{ font-family:var(--font-display); font-weight:800; font-size:1.5rem; margin:8px 0 var(--space-3); }
+.tier p{ color:var(--text-mid); font-size:.95rem; max-width:72ch; }
+.tier .out{
+  margin-top: var(--space-4); font-size:.88rem; color:var(--text-hi);
+  border-top:1px dashed var(--line); padding-top: var(--space-4);
+}
+.tier .out b{ color:var(--ikb-bright); }
+
+/* ---------- 48 场 ---------- */
+.act-head{
+  display:grid; grid-template-columns: repeat(3,1fr); gap: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+.act-kpi{
+  padding: var(--space-5) 0; border-top:1px solid var(--line);
+}
+.act-kpi .num{
+  font-family:var(--font-display); font-weight:900; font-size: clamp(2.6rem,6vw,4.2rem);
+  line-height:1; color:var(--text-hi); font-variant-numeric:tabular-nums;
+}
+.act-kpi .num i{ color:var(--ikb-bright); font-style:normal; }
+.act-kpi .lbl{ margin-top:6px; color:var(--text-low); font-size:.8rem; letter-spacing:.06em; }
+.act-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap: var(--space-5); }
+.act-card{
+  background:var(--bg-2); padding: var(--space-5) var(--space-5) var(--space-6);
+  border-top:3px solid var(--ikb);
+  transition:transform .3s cubic-bezier(.22,1,.36,1), background .3s;
+  display:flex; flex-direction:column;
+}
+.act-card:hover{ transform:translateY(-6px); background:var(--bg-3); }
+.act-card .num{
+  font-family:var(--font-display); font-weight:900; font-size:2.6rem; line-height:1;
+  color:transparent; -webkit-text-stroke:1.2px var(--ikb-bright);
+}
+.act-card h3{ font-family:var(--font-display); font-weight:800; font-size:1.15rem; margin:10px 0 6px; }
+.act-card .goal{ font-size:.78rem; color:var(--ikb-bright); letter-spacing:.04em; margin-bottom:10px; }
+.act-card .ex{ font-size:.85rem; color:var(--text-mid); line-height:1.6; }
+.act-card .ex span{ display:block; }
+.season{
+  margin-top: var(--space-8); display:grid; grid-template-columns: repeat(4,1fr); gap: var(--space-5);
+}
+.season-card{
+  padding: var(--space-5); background:var(--bg-1); border:1px solid var(--line);
+}
+.season-card .q{
+  font-family:var(--font-display); font-weight:800; font-size:1.6rem; color:var(--ikb-bright);
+}
+.season-card p{ margin-top:8px; font-size:.85rem; color:var(--text-mid); }
+
+/* ---------- 活动流程 ---------- */
+.flow-cols{ display:grid; grid-template-columns: repeat(3,1fr); gap: var(--space-6); align-items:start; }
+.flow-col .phase{
+  font-family:var(--font-display); font-weight:800; font-size:1.2rem; letter-spacing:.04em;
+  padding-bottom: var(--space-3); border-bottom:2px solid var(--ikb-bright); margin-bottom: var(--space-5);
+  display:flex; align-items:center; gap:10px;
+}
+.flow-col .phase i{
+  font-style:normal; font-family:var(--font-display); font-weight:900; font-size:1.6rem;
+  color:transparent; -webkit-text-stroke:1px var(--ikb-bright);
+}
+.flow-col ol{ list-style:none; counter-reset:fc; display:grid; gap: var(--space-4); }
+.flow-col ol li{
+  counter-increment:fc; padding: var(--space-4);
+  background:var(--bg-2); border-left:2px solid var(--line);
+  transition:border-color .25s, background .25s;
+}
+.flow-col ol li:hover{ border-left-color:var(--ikb); background:var(--bg-3); }
+.flow-col ol li::before{
+  content:"0" counter(fc); font-family:var(--font-display); font-weight:800;
+  font-size:.72rem; letter-spacing:.1em; color:var(--ikb-bright); display:block; margin-bottom:6px;
+}
+.flow-col ol li b{ display:block; font-size:.92rem; color:var(--text-hi); font-weight:600; }
+.flow-col ol li span{ font-size:.82rem; color:var(--text-mid); }
+.flow-col.timeline ol li{ display:grid; grid-template-columns: 72px 1fr; gap:12px; align-items:baseline; }
+.flow-col.timeline .time{
+  font-family:var(--font-display); font-weight:700; font-size:.8rem; color:var(--ikb-bright);
+  font-variant-numeric:tabular-nums;
+}
+
+/* ---------- 交付 / 支持 / 收入 ---------- */
+.deliv-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap: var(--space-5); }
+.deliv-card{
+  padding: var(--space-6); background:var(--bg-2); border-top:3px solid var(--line);
+  transition:transform .3s, border-color .3s;
+}
+.deliv-card:hover{ transform:translateY(-5px); border-top-color:var(--ikb); }
+.deliv-card .t{
+  font-family:var(--font-display); font-weight:800; font-size:1.08rem;
+  display:flex; justify-content:space-between; align-items:baseline;
+}
+.deliv-card .t i{ font-style:normal; font-family:var(--font-display); font-weight:900; color:var(--ikb-bright); }
+.deliv-card p{ margin-top:10px; color:var(--text-mid); font-size:.88rem; }
+.deliv-card .res{
+  margin-top: var(--space-4); font-size:.82rem; color:var(--text-hi);
+  border-top:1px dashed var(--line); padding-top: var(--space-3);
+}
+.deliv-card .res b{ color:var(--ikb-bright); }
+
+/* ---------- 合作模式 ---------- */
+.partner-grid{ display:grid; grid-template-columns: repeat(2,1fr); gap: var(--space-5); }
+.partner-card{
+  position:relative; padding: var(--space-7) var(--space-6) var(--space-6);
+  background:var(--bg-2); overflow:hidden;
+  transition:background .3s, transform .3s;
+}
+.partner-card::before{
+  content:""; position:absolute; top:0; left:0; width:100%; height:3px;
+  background:var(--ikb); transform:scaleX(0); transform-origin:left;
+  transition:transform .4s cubic-bezier(.22,1,.36,1);
+}
+.partner-card:hover::before{ transform:scaleX(1); }
+.partner-card:hover{ background:var(--bg-3); }
+.partner-card .n{
+  font-family:var(--font-display); font-weight:900; font-size:4.2rem; line-height:1;
+  color:transparent; -webkit-text-stroke:1px var(--text-low); position:absolute; top:8px; right:20px;
+}
+.partner-card h3{ font-family:var(--font-display); font-weight:800; font-size:1.3rem; }
+.partner-card .who{ font-size:.76rem; color:var(--ikb-bright); letter-spacing:.1em; margin:6px 0 12px; }
+.partner-card p{ color:var(--text-mid); font-size:.9rem; }
+
+/* ---------- 实施路径 ---------- */
+.path{ position:relative; }
+.path::before{
+  content:""; position:absolute; left:52px; top:8px; bottom:8px; width:1px;
+  background:var(--line);
+}
+.path-step{
+  position:relative; display:grid; grid-template-columns: 104px 1fr; gap: var(--space-6);
+  padding: var(--space-5) 0;
+}
+.path-step .dot{
+  width:104px; height:104px; display:grid; place-items:center;
+  font-family:var(--font-display); font-weight:900; font-size:2rem;
+  background:var(--bg-2); border:1px solid var(--line); color:var(--text-hi);
+  font-variant-numeric:tabular-nums; position:relative; z-index:2;
+  transition:background .3s, border-color .3s, color .3s;
+}
+.path-step:hover .dot{ background:var(--ikb); border-color:var(--ikb); color:#fff; }
+.path-step .stage{
+  padding: var(--space-2) 0;
+}
+.path-step .stage .dur{
+  font-family:var(--font-display); font-weight:700; font-size:.72rem;
+  letter-spacing:.2em; color:var(--ikb-bright); text-transform:uppercase;
+}
+.path-step .stage h3{ font-family:var(--font-display); font-weight:800; font-size:1.3rem; margin:8px 0 10px; }
+.path-step .stage p{ color:var(--text-mid); font-size:.93rem; max-width:70ch; }
+
+/* ---------- 平台化 / 目标 ---------- */
+.evo-list{ display:grid; grid-template-columns: repeat(5,1fr); gap: var(--space-5); }
+.evo-item{ padding-top: var(--space-5); border-top:2px solid var(--line); }
+.evo-item .n{
+  font-family:var(--font-display); font-weight:900; font-size:2.2rem; color:var(--ikb-bright);
+  line-height:1; margin-bottom: var(--space-3);
+}
+.evo-item h4{ font-family:var(--font-display); font-weight:700; font-size:1.02rem; margin-bottom:8px; }
+.evo-item p{ font-size:.84rem; color:var(--text-mid); }
+
+/* 目标表格 */
+.aim-table{ width:100%; border-collapse:collapse; }
+.aim-table thead th{
+  font-family:var(--font-display); font-weight:700; font-size:.72rem; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--text-low); text-align:left;
+  padding: var(--space-4); border-bottom:2px solid var(--ikb-bright);
+}
+.aim-table tbody td{
+  padding: var(--space-5) var(--space-4); border-bottom:1px solid var(--line);
+  font-size:.92rem; vertical-align:top;
+}
+.aim-table tbody tr:hover{ background:var(--bg-2); }
+.aim-table td.ph{ font-family:var(--font-display); font-weight:700; white-space:nowrap; }
+.aim-table td.ph em{ font-style:normal; color:var(--ikb-bright); margin-right:8px; }
+
+/* ---------- 愿景 ---------- */
+.vision{
+  position:relative; padding: var(--space-10) 0; overflow:hidden; text-align:center;
+}
+.vision::before{
+  content:""; position:absolute; inset:0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size:88px 88px; opacity:.5;
+}
+.vision::after{
+  content:""; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  width:620px; height:620px; border:1px solid var(--line); border-radius:50%;
+  box-shadow: 0 0 0 60px rgba(0,47,167,.05), 0 0 0 120px rgba(0,47,167,.03);
+}
+.vision .wrap{ position:relative; z-index:2; }
+.vision .eyebrow{ justify-content:center; }
+.vision .eyebrow::before{ display:none; }
+.vision h2{
+  font-family:var(--font-display); font-weight:900;
+  font-size: clamp(1.9rem, 5vw, 3.6rem); line-height:1.15;
+  max-width:20ch; margin:0 auto;
+}
+.vision .mission{
+  margin: var(--space-6) auto 0; max-width: 60ch; color:var(--text-mid); font-size:1.02rem;
+}
+.vision .slogan{
+  margin-top: var(--space-8); display:inline-block;
+  font-family:var(--font-display); font-weight:800;
+  font-size: clamp(1.1rem,2.6vw,1.7rem); letter-spacing:.04em;
+  color:var(--text-hi); padding: var(--space-5) var(--space-7);
+  border:1px solid var(--ikb-bright);
+}
+.vision .slogan b{ color:var(--ikb-bright); }
+
+/* ---------- Footer ---------- */
+footer{
+  border-top:1px solid var(--line); padding: var(--space-7) 0 var(--space-8);
+  display:flex; justify-content:space-between; align-items:flex-start; gap: var(--space-6);
+}
+footer .fb{ font-family:var(--font-display); font-weight:800; letter-spacing:.14em; }
+footer .fb em{ color:var(--ikb-bright); font-style:normal; }
+footer .fb small{ display:block; font-weight:600; font-size:.6rem; letter-spacing:.3em; color:var(--text-low); margin-top:4px; }
+footer .fl{ color:var(--text-low); font-size:.78rem; text-align:right; line-height:2; }
+
+/* ---------- 滚动动画 ---------- */
+.reveal{ opacity:0; transform: translateY(34px); transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1); }
+.reveal.in{ opacity:1; transform:none; }
+.reveal.d1{ transition-delay:.08s; } .reveal.d2{ transition-delay:.16s; }
+.reveal.d3{ transition-delay:.24s; } .reveal.d4{ transition-delay:.32s; }
+@media (prefers-reduced-motion: reduce){
+  .reveal{ opacity:1; transform:none; transition:none; }
+  html{ scroll-behavior:auto; }
+  .hero-scroll::before{ animation:none; }
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 1024px){
+  .nav .links{ display:none; }
+  .summary-grid{ grid-template-columns:1fr; }
+  .pos-grid{ grid-template-columns:1fr; }
+  .act-head{ grid-template-columns:repeat(3,1fr); }
+  .act-grid{ grid-template-columns:repeat(2,1fr); }
+  .value-grid{ grid-template-columns:repeat(2,1fr); }
+  .flow-cols{ grid-template-columns:1fr; }
+  .deliv-grid{ grid-template-columns:repeat(2,1fr); }
+  .evo-list{ grid-template-columns:repeat(2,1fr); }
+  .tier{ grid-template-columns:1fr; }
+  .tier .tier-body{ padding-left: var(--space-6); }
+}
+@media (max-width: 720px){
+  .hero{ padding-top:130px; }
+  .hero-stats{ grid-template-columns:repeat(2,1fr); }
+  .hero-stat:nth-child(2){ border-right:none; }
+  .hero-stat:nth-child(1),.hero-stat:nth-child(2){ border-bottom:1px solid var(--line); }
+  .hero-stat:nth-child(3){ border-bottom:1px solid var(--line); }
+  .sec-head{ grid-template-columns:1fr; gap: var(--space-3); }
+  .pain-list{ grid-template-columns:1fr; }
+  .pain-item:nth-child(odd){ padding-right:0; }
+  .why-grid{ grid-template-columns:1fr; }
+  .value-grid{ grid-template-columns:1fr; }
+  .act-grid{ grid-template-columns:1fr; }
+  .act-head{ grid-template-columns:1fr; }
+  .season{ grid-template-columns:repeat(2,1fr); }
+  .deliv-grid{ grid-template-columns:1fr; }
+  .partner-grid{ grid-template-columns:1fr; }
+  .path-step{ grid-template-columns:1fr; gap: var(--space-3); }
+  .path::before{ left:8px; }
+  .path-step .dot{ width:64px; height:64px; font-size:1.4rem; }
+  .pos-banner{ flex-direction:column; align-items:flex-start; gap: var(--space-4); }
+  .pos-banner .line{ width:100%; height:1px; }
+  .client-table thead{ display:none; }
+  .client-table, .client-table tbody, .client-table tr, .client-table td{ display:block; width:100%; }
+  .client-table tbody tr{ padding: var(--space-4) 0; border-bottom:1px solid var(--line); }
+  .client-table tbody td{ border:none; padding: var(--space-2) 0; }
+  .client-table td.type{ font-size:1.05rem; }
+  .client-table td.cur::before{ content:"现状 / "; color:var(--text-low); font-size:.72rem; letter-spacing:.1em; }
+  .client-table td.help::before{ content:"→ "; }
+  .aim-table thead{ display:none; }
+  .aim-table, .aim-table tbody, .aim-table tr, .aim-table td{ display:block; width:100%; }
+  .aim-table tbody tr{ padding: var(--space-4) 0; border-bottom:1px solid var(--line); }
+  .aim-table tbody td{ border:none; padding: var(--space-2) 0; }
+  footer{ flex-direction:column; }
+  footer .fl{ text-align:left; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- ================= 导航 ================= -->
+<header class="nav">
+  <div class="brand">
+    <b>每<em>草</em>堂</b>
+    <span>MEI CAO TANG</span>
+  </div>
+  <nav class="links">
+    <a href="#summary">摘要</a>
+    <a href="#position">定位</a>
+    <a href="#product">产品</a>
+    <a href="#annual">48场体系</a>
+    <a href="#flow">活动流程</a>
+    <a href="#model">商业模式</a>
+    <a href="#partner">合作</a>
+    <a href="#vision">愿景</a>
+  </nav>
+  <a class="cta" href="#vision">获取方案</a>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow reveal in">健康沙龙运营赋能平台 · 商业方案 2026</div>
+    <h1 class="reveal in d1">从<span class="blue">会办一场沙龙</span><br>到持续经营<br>客户资产</h1>
+    <p class="sub reveal in d2">
+      面向大健康创业者、健康门店经营者、产品分销商与社群运营者，提供一套
+      <b>可复制的健康沙龙经营系统</b> —— 训练、活动、师资、内容、物料、数据与复盘，
+      从一次活动沉淀为可持续服务与复购的长期关系。
+    </p>
+    <div class="hero-stats reveal in d3">
+      <div class="hero-stat"><div class="num">48<i>场</i></div><div class="lbl">年度活动体系</div></div>
+      <div class="hero-stat"><div class="num">3<i>层</i></div><div class="lbl">产品体系</div></div>
+      <div class="hero-stat"><div class="num">5<i>类</i></div><div class="lbl">目标客群</div></div>
+      <div class="hero-stat"><div class="num">15-35<i>人</i></div><div class="lbl">每场高价值沙龙</div></div>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ================= 01 项目摘要 ================= -->
+<section id="summary" class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">01<small>/ 摘要</small></div>
+      <div>
+        <h2 class="sec-title">不只是活动方案<br><span class="thin">而是一套经营系统</span></h2>
+      </div>
+    </div>
+    <div class="summary-grid">
+      <div class="summary-lead reveal">
+        每草堂以<em>沙龙活动运营商</em>为轻量切入口：通过有主题、有体验、有专业讲解、有成交承接的小型高价值活动，
+        帮助合作伙伴<em>稳定获客</em>、<em>快速建立信任</em>、<em>提升转化</em>，
+        并把一次活动沉淀为可持续服务与复购的长期关系。
+      </div>
+      <div class="summary-extra">
+        <div class="summary-line reveal"><span class="tag">项目角色</span><p>大健康领域的<b>沙龙活动运营赋能平台</b></p></div>
+        <div class="summary-line reveal"><span class="tag">核心方法</span><p>高价值、小规模、强互动的健康沙龙，完成 <b>「获客—信任—成交—复购—转介绍」</b> 闭环</p></div>
+        <div class="summary-line reveal"><span class="tag">交付重点</span><p>标准化活动体系 ＋ 本地化执行陪跑 ＋ 长期经营工具</p></div>
+        <div class="summary-line reveal"><span class="tag">长期目标</span><p>让每一位健康事业经营者都拥有<b>持续组织高质量活动、持续服务客户</b>的能力</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 02 项目定位 ================= -->
+<section id="position" class="sec alt-bg">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">02<small>/ 定位</small></div>
+      <div>
+        <h2 class="sec-title">健康沙龙的<br><span class="thin">运营中台</span></h2>
+        <p class="sec-desc">不是单次活动策划公司，也不是只卖课程或产品的渠道 —— 把复杂的选题、内容、流程、物料、老师、邀约与复盘，变成一套能被本地团队真正执行的<b>标准动作</b>。</p>
+      </div>
+    </div>
+    <div class="pos-grid">
+      <div class="pos-card reveal"><div class="k">Position</div><h3>项目角色</h3><p>大健康领域沙龙活动运营赋能平台，以「运营中台」定位服务一线经营者。</p></div>
+      <div class="pos-card reveal d1"><div class="k">Service</div><h3>服务对象</h3><p>大健康创业者、健康门店、产品分销商、社群主理人及其团队。</p></div>
+      <div class="pos-card reveal d2"><div class="k">Method</div><h3>核心方法</h3><p>用高价值、小规模、强互动的健康沙龙完成获客到转介绍的经营闭环。</p></div>
+    </div>
+    <div class="pos-banner reveal">
+      <div class="big">
+        <small>WE ARE NOT EVENT PLANNER</small>
+        我们提供的是<br>一套可复制的经营系统
+      </div>
+      <div class="line"></div>
+      <div class="note">训练 · 活动 · 师资 · 内容 · 物料 · 数据 · 复盘<br>最终形成平台化的协同网络。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 03 行业痛点 ================= -->
+<section id="pain" class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">03<small>/ 痛点</small></div>
+      <div>
+        <h2 class="sec-title">一线经营者的<br><span class="thin">六道难题</span></h2>
+        <p class="sec-desc">大健康消费正从「购买产品」走向「专业指导、信任关系、长期陪伴」的综合决策 —— 但许多经营者仍深陷以下困境。</p>
+      </div>
+    </div>
+    <div class="pain-list">
+      <div class="pain-item reveal"><div class="idx">01</div><div><h4><span class="bar">—</span>获客成本持续上升</h4><p>线上流量昂贵且不稳定，线下自然到店不足，陌生客户难以快速转化。</p></div></div>
+      <div class="pain-item reveal"><div class="idx">02</div><div><h4><span class="bar">—</span>讲解缺乏说服力</h4><p>产品同质化，客户对单次促销和硬性推荐天然警惕，宣传难以取信。</p></div></div>
+      <div class="pain-item reveal"><div class="idx">03</div><div><h4><span class="bar">—</span>缺少信任场景</h4><p>一对一沟通效率低，群发内容难以形成真实连接与体验感。</p></div></div>
+      <div class="pain-item reveal"><div class="idx">04</div><div><h4><span class="bar">—</span>活动难以持续</h4><p>不会定主题、邀约、控场、成交，办一两次后便中断。</p></div></div>
+      <div class="pain-item reveal"><div class="idx">05</div><div><h4><span class="bar">—</span>成交与服务脱节</h4><p>活动结束没有跟进机制，客户档案、需求标签、复购与转介绍未被沉淀。</p></div></div>
+      <div class="pain-item reveal"><div class="idx">06</div><div><h4><span class="bar">—</span>团队缺少标准</h4><p>内容、话术、物料与服务品质不一致，品牌难以规模化。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 04 为什么切入 ================= -->
+<section class="sec alt-bg">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">04<small>/ 为什么</small></div>
+      <div>
+        <h2 class="sec-title">为什么从<br><span class="thin">健康沙龙切入</span></h2>
+        <p class="sec-desc">健康产品与服务具有「高信任、强体验、需教育、重长期」的特点 —— 相比简单促销，健康沙龙更适合承载用户决策过程。</p>
+      </div>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal"><div class="n">01</div><h3>低门槛 · 高信任的入口</h3><p>一场 15—35 人的主题沙龙，围绕明确健康问题展开，在轻松、熟人推荐与互动体验中建立信任，心理阻力更低。</p></div>
+      <div class="why-card reveal d1"><div class="n">02</div><h3>把「卖产品」转为「提供方案」</h3><p>从客户真实困扰出发，产品只是解决方案的一部分，经营者获得更自然、更专业的沟通位置。</p></div>
+      <div class="why-card reveal d2"><div class="n">03</div><h3>可重复 · 可裂变 · 可沉淀</h3><p>成熟主题可在不同社区、门店、企业反复开展；到场客户可邀请亲友，沉淀为私域客户资产。</p></div>
+      <div class="why-card reveal d3"><div class="n">04</div><h3>团队能力升级的训练场</h3><p>邀约、接待、讲解、体验、成交、回访等真实经营动作，通过持续实战建立服务客户与带团队的能力。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 05 目标客户 ================= -->
+<section id="client" class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">05<small>/ 客群</small></div>
+      <div>
+        <h2 class="sec-title">五类目标客户<br><span class="thin">与关键帮助</span></h2>
+      </div>
+    </div>
+    <table class="client-table reveal">
+      <thead><tr><th>客户类型</th><th>常见现状</th><th>每草堂的关键帮助</th></tr></thead>
+      <tbody>
+        <tr><td class="type">大健康创业者</td><td class="cur">有热情、有产品或资源，但缺少稳定获客方式</td><td class="help">建立个人健康沙龙品牌与可复制的经营节奏</td></tr>
+        <tr><td class="type">健康门店经营者</td><td class="cur">有门店、有老客，但到店率与复购率不足</td><td class="help">用主题活动激活老客、吸引新客、提升连带成交</td></tr>
+        <tr><td class="type">产品分销商</td><td class="cur">有产品体系，但讲解与转化主要依赖个人</td><td class="help">用专业内容和活动路径建立信任，降低硬推压力</td></tr>
+        <tr><td class="type">社群运营者</td><td class="cur">有社群流量，但互动和商业转化偏弱</td><td class="help">将线上社群导入线下体验与持续服务闭环</td></tr>
+        <tr><td class="type">区域组织者</td><td class="cur">想带团队、做区域市场，但缺统一工具</td><td class="help">获得活动标准、师资支持和区域运营机制</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================= 06 核心价值主张 ================= -->
+<section class="value-band">
+  <div class="wrap">
+    <div class="vh reveal">四个经营结果<br>帮助合作伙伴实现</div>
+    <div class="value-grid">
+      <div class="value-cell reveal"><div class="ico">01</div><h3>稳定获客</h3><p>以主题活动和熟人邀请，持续获得高意向客户。</p></div>
+      <div class="value-cell reveal d1"><div class="ico">02</div><h3>快速建立信任</h3><p>专业内容、真实案例、体验互动与服务流程提升信任度。</p></div>
+      <div class="value-cell reveal d2"><div class="ico">03</div><h3>持续成交</h3><p>将客户需求转为健康管理方案，活动后跟进完成自然成交。</p></div>
+      <div class="value-cell reveal d3"><div class="ico">04</div><h3>长期经营</h3><p>通过会员、复购、家庭客户、转介绍与年度活动安排形成可持续客户价值。</p></div>
+    </div>
+    <div class="chain-note reveal">最终交付不是一堆课件，而是一条可以执行的增长链路</div>
+    <div class="chain reveal">
+      <span>明确目标客户</span><span class="sep">→</span>
+      <span>设计主题</span><span class="sep">→</span>
+      <span>定向邀约</span><span class="sep">→</span>
+      <span>高质量活动</span><span class="sep">→</span>
+      <span>需求识别</span><span class="sep">→</span>
+      <span>方案服务</span><span class="sep">→</span>
+      <span>回访复购</span><span class="sep">→</span>
+      <span>转介绍</span><span class="sep">→</span>
+      <span>下一场活动</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 07 三层产品体系 ================= -->
+<section id="product" class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">07<small>/ 产品</small></div>
+      <div>
+        <h2 class="sec-title">三层产品体系<br><span class="thin">从入门到平台</span></h2>
+        <p class="sec-desc">按经营阶段递进：先掌握方法，再建立节奏，最终接入平台网络。</p>
+      </div>
+    </div>
+    <div class="tier-stack">
+      <div class="tier reveal">
+        <div class="tier-no">L1</div>
+        <div class="tier-body">
+          <div class="lvl">Tier 01 · 入门</div>
+          <h3>沙龙运营训练营</h3>
+          <p>面向刚起步或希望提升活动能力的个人与团队，在短周期内掌握独立举办健康沙龙的基本方法。涵盖健康沙龙商业逻辑、客户画像与主题设计、邀约报名、主持控场、专业表达、体验环节、成交承接、客户跟进、活动复盘与团队分工。</p>
+          <div class="out">课程形式：<b>方法讲解 + 模拟演练 + 作业反馈 + 首场实战</b> —— 结营即具备完成一场标准沙龙的能力，并形成自己的首期活动计划。</div>
+        </div>
+      </div>
+      <div class="tier reveal d1">
+        <div class="tier-no">L2</div>
+        <div class="tier-body">
+          <div class="lvl">Tier 02 · 陪跑</div>
+          <h3>48 场年度沙龙陪跑</h3>
+          <p>面向希望建立稳定活动频率、做出经营成果的伙伴或门店。规划全年 48 场主题活动，按周或双周节奏开展，提供选题排期、活动模板、执行辅导、师资协调、物料支持与复盘优化。</p>
+          <div class="out">核心不是「替客户办 48 场」，而是把 48 场变成一套<b>增长机制</b>：每场有目标、有数据、有客户后续动作，全年形成可衡量的客户资产与业绩增长。</div>
+        </div>
+      </div>
+      <div class="tier reveal d2">
+        <div class="tier-no">L3</div>
+        <div class="tier-body">
+          <div class="lvl">Tier 03 · 平台</div>
+          <h3>健康沙龙运营平台</h3>
+          <p>服务成熟团队、区域伙伴及生态合作方：活动内容库、老师资源库、模板物料库、报名与客户管理、活动数据看板、案例共创、区域协作与品牌规范。</p>
+          <div class="out">让经验被沉淀、优秀做法被复制、各地伙伴在统一标准下保留本地特色，<b>从单点活动走向网络化运营</b>。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 08 48 场年度活动体系 ================= -->
+<section id="annual" class="sec alt-bg">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">08<small>/ 年度体系</small></div>
+      <div>
+        <h2 class="sec-title">48 场年度活动体系<br><span class="thin">每月 4 场的基础节奏</span></h2>
+        <p class="sec-desc">兼顾健康教育、客户体验、服务转化与社群关系维护，不同区域可结合季节、客群与经营重点灵活调整。</p>
+      </div>
+    </div>
+    <div class="act-head reveal">
+      <div class="act-kpi"><div class="num">48<i>场</i></div><div class="lbl">全年总计 · 每月 4 场</div></div>
+      <div class="act-kpi"><div class="num">12<i>+12</i></div><div class="lbl">认知沙龙 ＋ 解决方案沙龙</div></div>
+      <div class="act-kpi"><div class="num">6<i>大</i></div><div class="lbl">模块覆盖获客—信任—转化—维护</div></div>
+    </div>
+    <div class="act-grid">
+      <div class="act-card reveal"><div class="num">12</div><h3>健康认知沙龙</h3><div class="goal">建立专业信任 · 吸引新客户</div><div class="ex"><span>睡眠修复 · 免疫力管理</span><span>家庭营养 · 科学养生误区</span></div></div>
+      <div class="act-card reveal d1"><div class="num">12</div><h3>专项解决方案沙龙</h3><div class="goal">围绕高频需求形成方案咨询</div><div class="ex"><span>体重管理 · 血糖管理 · 肠道健康</span><span>女性健康 · 骨关节养护</span></div></div>
+      <div class="act-card reveal d2"><div class="num">08</div><h3>体验与测评活动</h3><div class="goal">感受服务价值 · 识别需求</div><div class="ex"><span>健康测评日 · 轻断食体验</span><span>体质评估 · 产品体验会</span></div></div>
+      <div class="act-card reveal"><div class="num">06</div><h3>客户成果分享会</h3><div class="goal">真实案例强化信任与复购</div><div class="ex"><span>健康改变故事会 · 客户感谢会</span><span>阶段成果见证会</span></div></div>
+      <div class="act-card reveal d1"><div class="num">06</div><h3>家庭与社群主题活动</h3><div class="goal">拓展家庭客户 · 促进转介绍</div><div class="ex"><span>家庭健康日 · 亲子营养课</span><span>节气养护 · 邻里健康茶话会</span></div></div>
+      <div class="act-card reveal d2"><div class="num">04</div><h3>会员维护与伙伴共创</h3><div class="goal">提升粘性 · 激活会员与团队</div><div class="ex"><span>会员专享会 · 年度健康计划会</span><span>伙伴交流会 · 年终答谢会</span></div></div>
+    </div>
+    <div class="season">
+      <div class="season-card reveal"><div class="q">Q1</div><p>建立认知与客户档案：新年健康规划、免疫力、睡眠、体质评估。</p></div>
+      <div class="season-card reveal d1"><div class="q">Q2</div><p>聚焦体重管理、女性健康、肠道健康等高互动主题，提升到场与转化。</p></div>
+      <div class="season-card reveal d2"><div class="q">Q3</div><p>围绕家庭健康、慢病风险与社区活动扩展客群，强化转介绍。</p></div>
+      <div class="season-card reveal d3"><div class="q">Q4</div><p>成果展示、会员维护、年度复盘与来年规划，提升复购与续约。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 09 标准活动执行流程 ================= -->
+<section id="flow" class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">09<small>/ 执行流程</small></div>
+      <div>
+        <h2 class="sec-title">标准活动执行流程<br><span class="thin">活动前 · 活动中 · 活动后</span></h2>
+        <p class="sec-desc">一场标准沙龙 = 明确的策划目标 + 完整的价值交付 + 及时的跟进复盘。</p>
+      </div>
+    </div>
+    <div class="flow-cols">
+      <div class="flow-col reveal">
+        <div class="phase"><i>前</i>活动前 · 策划与邀约</div>
+        <ol>
+          <li><b>明确本场目标</b><span>新客人数、到场率、测评人数、咨询数、成交或预约目标。</span></li>
+          <li><b>确定主题与客群</b><span>一个活动只解决一个主要问题，避免内容过散。</span></li>
+          <li><b>制定邀约名单</b><span>老客户转介绍、潜在客户、社群活跃者与周边目标人群。</span></li>
+          <li><b>使用标准邀约工具</b><span>海报、报名表、朋友圈文案、私聊话术、提醒模板。</span></li>
+          <li><b>场地与流程彩排</b><span>完成场地、物料、人员与流程彩排，确保体验与接待细节到位。</span></li>
+        </ol>
+      </div>
+      <div class="flow-col timeline reveal d1">
+        <div class="phase"><i>中</i>活动中 · 价值交付与需求承接</div>
+        <ol>
+          <li><span class="time">15′</span><div><b>签到暖场</b><span>建档、破冰、了解来宾关注问题。</span></div></li>
+          <li><span class="time">10′</span><div><b>主题导入</b><span>说明活动价值和今日收获，建立轻松氛围。</span></div></li>
+          <li><span class="time">30-45′</span><div><b>专业分享</b><span>用通俗内容解释问题、误区与改善路径。</span></div></li>
+          <li><span class="time">20-30′</span><div><b>互动体验</b><span>测评、体验、问答或小组讨论，提升参与感。</span></div></li>
+          <li><span class="time">15-20′</span><div><b>方案介绍</b><span>以需求为导向介绍服务方案，避免硬性推销。</span></div></li>
+          <li><span class="time">15′</span><div><b>一对一咨询预约</b><span>分层标记意向客户，明确后续服务时间。</span></div></li>
+          <li><span class="time">05′</span><div><b>合影与转介绍邀请</b><span>沉淀社交传播素材，邀请下场活动伙伴。</span></div></li>
+        </ol>
+      </div>
+      <div class="flow-col reveal d2">
+        <div class="phase"><i>后</i>活动后 · 回访、成交与复盘</div>
+        <ol>
+          <li><b>24 小时内</b><span>发送感谢与活动资料，完成未到场客户关怀。</span></li>
+          <li><b>48 小时内回访</b><span>按客户标签回访：高意向优先预约咨询，体验客户安排服务跟进，普通客户进入内容培育。</span></li>
+          <li><b>一周内团队复盘</b><span>对照目标分析邀约、到场、互动、咨询、成交与转介绍数据。</span></li>
+          <li><b>档案沉淀优化</b><span>将客户需求、优秀话术、问题与案例录入档案，优化下一场活动。</span></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 10 服务交付体系 ================= -->
+<section id="deliver" class="sec alt-bg">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">10<small>/ 交付</small></div>
+      <div>
+        <h2 class="sec-title">服务交付体系<br><span class="thin">总部赋能 · 区域协同 · 本地执行</span></h2>
+        <p class="sec-desc">确保伙伴既拿到工具，也能真正落地。</p>
+      </div>
+    </div>
+    <div class="deliv-grid">
+      <div class="deliv-card reveal"><div class="t">运营诊断 <i>01</i></div><p>评估客户结构、门店/社群基础、团队能力与年度目标。</p><div class="res">结果：<b>明确适合自身的活动起点与优先级</b></div></div>
+      <div class="deliv-card reveal d1"><div class="t">年度规划 <i>02</i></div><p>48 场排期、主题组合、经营指标与资源配置。</p><div class="res">结果：<b>有节奏、有目标的全年行动计划</b></div></div>
+      <div class="deliv-card reveal d2"><div class="t">能力训练 <i>03</i></div><p>课程、演练、带教、现场辅导。</p><div class="res">结果：<b>团队掌握可重复的活动能力</b></div></div>
+      <div class="deliv-card reveal"><div class="t">活动支持 <i>04</i></div><p>主题包、老师、物料、执行清单与现场建议。</p><div class="res">结果：<b>降低策划成本，提高活动品质</b></div></div>
+      <div class="deliv-card reveal d1"><div class="t">客户运营 <i>05</i></div><p>报名建档、需求标签、回访脚本、社群内容建议。</p><div class="res">结果：<b>让活动流量转为客户资产</b></div></div>
+      <div class="deliv-card reveal d2"><div class="t">数据复盘 <i>06</i></div><p>场次数据、问题诊断、案例沉淀与下场优化。</p><div class="res">结果：<b>从经验经营走向数据驱动改进</b></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 11 关键支持资源 ================= -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">11<small>/ 资源</small></div>
+      <div>
+        <h2 class="sec-title">关键支持资源<br><span class="thin">让伙伴随时有依靠</span></h2>
+      </div>
+    </div>
+    <div class="deliv-grid">
+      <div class="deliv-card reveal"><div class="t">专业老师支持 <i>01</i></div><p>健康讲师负责知识、专题分享与案例解读；运营导师负责活动设计、现场节奏与成交承接。支持线上指导、远程连线或线下到场。</p></div>
+      <div class="deliv-card reveal d1"><div class="t">活动模板支持 <i>02</i></div><p>每个标准主题配套可直接使用的活动包：目标、客群、流程表、主持稿、PPT 框架、讲稿要点、互动设计、咨询表、邀约文案与回访话术。</p></div>
+      <div class="deliv-card reveal d2"><div class="t">品牌与物料支持 <i>03</i></div><p>活动海报、报名页、签到表、需求表、桌牌、背景板建议、体验卡、服务方案单页、活动照片使用规范。统一视觉与表达，建立专业可信形象。</p></div>
+      <div class="deliv-card reveal"><div class="t">复盘支持 <i>04</i></div><p>统一复盘表，至少追踪：邀请人数、报名人数、到场人数、新客数、有效咨询数、成交/预约数、复购数、转介绍数。不以业绩评判，而是定位链路中最需改善的一环。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 12 商业模式与收入结构 ================= -->
+<section id="model" class="sec alt-bg">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">12<small>/ 商业模式</small></div>
+      <div>
+        <h2 class="sec-title">商业模式与收入结构<br><span class="thin">能力服务 + 年度运营 + 平台协同</span></h2>
+        <p class="sec-desc">收入与伙伴经营成果和服务深度逐步匹配，所有合作以合法合规、真实专业与客户长期价值为前提。</p>
+      </div>
+    </div>
+    <div class="deliv-grid">
+      <div class="deliv-card reveal"><div class="t">沙龙运营训练营 <i>01</i></div><p>按个人或团队报名收费</p><div class="res">提供<b>入门方法、实战训练与首场活动启动</b></div></div>
+      <div class="deliv-card reveal d1"><div class="t">年度陪跑服务 <i>02</i></div><p>按门店、团队或区域年度服务收费</p><div class="res">提供<b>48 场规划、运营辅导、资源支持与复盘</b></div></div>
+      <div class="deliv-card reveal d2"><div class="t">单场/主题活动包 <i>03</i></div><p>按主题包、师资或现场支持收费</p><div class="res">满足阶段性需求，形成<b>低门槛入口</b></div></div>
+      <div class="deliv-card reveal"><div class="t">平台会员与工具服务 <i>04</i></div><p>按年或按账号订阅</p><div class="res">提供<b>内容库、模板库、客户运营工具和数据看板</b></div></div>
+      <div class="deliv-card reveal d1"><div class="t">区域合作与认证 <i>05</i></div><p>按区域授权、运营服务及能力认证收费</p><div class="res">支持区域组织者建立<b>标准化服务网络</b></div></div>
+      <div class="deliv-card reveal d2"><div class="t">生态协同收入 <i>06</i></div><p>与合规的健康服务、产品及资源合作</p><div class="res">在客户价值优先、信息透明基础上形成<b>协同收益</b></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 13 合作模式 ================= -->
+<section id="partner" class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">13<small>/ 合作</small></div>
+      <div>
+        <h2 class="sec-title">四种合作模式<br><span class="thin">总有一种适合你</span></h2>
+      </div>
+    </div>
+    <div class="partner-grid">
+      <div class="partner-card reveal"><div class="n">A</div><h3>个人伙伴模式</h3><div class="who">FOR INDIVIDUAL FOUNDER</div><p>适合希望建立个人健康事业的创业者。以训练营为起点，获得标准主题、工具与社群支持，逐步完成首场、月度和年度活动计划。</p></div>
+      <div class="partner-card reveal d1"><div class="n">B</div><h3>门店共建模式</h3><div class="who">FOR HEALTH STORE</div><p>适合健康门店、美业门店、养生空间及相关实体场所。共同制定活动日历，激活老客并导入周边新客；门店负责本地触达与服务承接，平台提供内容与运营支持。</p></div>
+      <div class="partner-card reveal d2"><div class="n">C</div><h3>社群联营模式</h3><div class="who">FOR COMMUNITY OWNER</div><p>适合拥有社群、私域或社区资源的组织者。通过线上内容预热、线下主题沙龙和活动后社群服务，形成稳定的用户转化路径。</p></div>
+      <div class="partner-card reveal d3"><div class="n">D</div><h3>区域运营伙伴模式</h3><div class="who">FOR REGIONAL PARTNER</div><p>适合具备团队管理与资源整合能力的伙伴。在平台标准下开展训练、组织活动和服务本地合作方，享受品牌、内容、师资、系统与运营支持。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 14 实施路径 ================= -->
+<section id="path" class="sec alt-bg">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">14<small>/ 路径</small></div>
+      <div>
+        <h2 class="sec-title">四阶段实施路径<br><span class="thin">从首场验证到平台接入</span></h2>
+      </div>
+    </div>
+    <div class="path">
+      <div class="path-step reveal">
+        <div class="dot">01</div>
+        <div class="stage">
+          <div class="dur">Phase 1 · 第 1—4 周</div>
+          <h3>启动诊断与首场验证</h3>
+          <p>完成经营基础诊断、目标客户梳理、首期主题确定、团队分工与邀约名单建设；通过首场标准沙龙验证到场、互动和咨询链路。</p>
+        </div>
+      </div>
+      <div class="path-step reveal">
+        <div class="dot">02</div>
+        <div class="stage">
+          <div class="dur">Phase 2 · 第 2—3 个月</div>
+          <h3>连续活动与模型打磨</h3>
+          <p>保持每周或双周一次的活动节奏，完成 6—12 场活动；依据数据优化主题、邀约、老师表达、体验环节与回访机制，形成适合本地的活动模型。</p>
+        </div>
+      </div>
+      <div class="path-step reveal">
+        <div class="dot">03</div>
+        <div class="stage">
+          <div class="dur">Phase 3 · 第 4—12 个月</div>
+          <h3>年度运营与团队复制</h3>
+          <p>进入 48 场年度节奏，建立客户分层服务、会员维护、转介绍机制与内部带教制度；从依赖个人举办活动，升级为团队稳定协同执行。</p>
+        </div>
+      </div>
+      <div class="path-step reveal">
+        <div class="dot">04</div>
+        <div class="stage">
+          <div class="dur">Phase 4 · 12 个月后</div>
+          <h3>区域协同与平台接入</h3>
+          <p>成熟伙伴接入平台的内容、师资、数据与案例体系，参与区域共创和伙伴培训，逐步形成区域服务节点与可复制网络。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 15 平台化演进 ================= -->
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">15<small>/ 平台化</small></div>
+      <div>
+        <h2 class="sec-title">平台化演进<br><span class="thin">把线下经验标准化 · 数字化 · 网络化</span></h2>
+        <p class="sec-desc">平台化不是简单上线一个软件，而是把线下运营的关键经验沉淀为可复制的体系。</p>
+      </div>
+    </div>
+    <div class="evo-list">
+      <div class="evo-item reveal"><div class="n">01</div><h4>内容标准化</h4><p>建立主题、课件、流程、话术、物料与案例的持续更新机制。</p></div>
+      <div class="evo-item reveal d1"><div class="n">02</div><h4>运营数字化</h4><p>沉淀报名、到场、客户标签、咨询、回访、复购及转介绍数据。</p></div>
+      <div class="evo-item reveal d2"><div class="n">03</div><h4>资源网络化</h4><p>连接老师、活动场地、区域伙伴、优秀案例与健康服务资源。</p></div>
+      <div class="evo-item reveal d3"><div class="n">04</div><h4>能力认证化</h4><p>建立主持人、活动运营师、区域教练等能力成长与认证路径。</p></div>
+      <div class="evo-item reveal d4"><div class="n">05</div><h4>协同生态化</h4><p>让优秀伙伴分享经验、获得更多服务机会，共同提升行业服务标准。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 16 阶段性目标 ================= -->
+<section class="sec alt-bg">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">16<small>/ 目标</small></div>
+      <div>
+        <h2 class="sec-title">阶段性目标<br><span class="thin">从试点到平台</span></h2>
+        <p class="sec-desc">每个阶段，我们更重视「伙伴是否形成可持续经营能力」，而不仅仅是单月成交额。稳健的客户价值和服务口碑才是规模增长的根基。</p>
+      </div>
+    </div>
+    <table class="aim-table reveal">
+      <thead><tr><th>阶段</th><th>核心目标</th><th>关键衡量指标</th></tr></thead>
+      <tbody>
+        <tr><td class="ph"><em>01</em>试点期</td><td>打磨活动模型与交付标准</td><td>首场成功率、到场率、客户反馈、复盘完整度</td></tr>
+        <tr><td class="ph"><em>02</em>成长期</td><td>建立年度陪跑样板与标杆案例</td><td>48 场完成率、新客沉淀、咨询转化、复购与转介绍</td></tr>
+        <tr><td class="ph"><em>03</em>扩张期</td><td>形成区域合作网络</td><td>活跃门店/团队数、认证运营者数、区域活动质量</td></tr>
+        <tr><td class="ph"><em>04</em>平台期</td><td>完成内容、数据和资源协同</td><td>平台使用率、活动复用率、伙伴留存与客户长期价值</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================= 17 项目愿景 ================= -->
+<section id="vision" class="vision">
+  <div class="wrap">
+    <div class="eyebrow reveal">17 / 项目愿景 · VISION</div>
+    <h2 class="reveal">成为大健康领域最值得信赖的<br>沙龙运营赋能平台</h2>
+    <p class="mission reveal">
+      健康服务不应止于一次销售，而应从一次真诚、有价值的相遇开始。通过每一场高质量健康沙龙，
+      让更多普通人获得可信、易懂、可坚持的健康支持；让更多经营者拥有专业服务客户、稳定发展事业的能力；
+      让健康产业的增长建立在长期信任、真实价值与共同成长之上。
+    </p>
+    <div class="slogan reveal">每草堂：让健康沙龙成为连接<b>专业、信任与长期经营</b>的桥梁。</div>
+  </div>
+</section>
+
+<footer>
+  <div class="fb">每<em>草</em>堂<small>MEI CAO TANG · HEALTH SALON PLATFORM</small></div>
+  <div class="fl">每草堂健康沙龙运营赋能平台 · 商业方案<br>© 2026 每草堂 · 让健康沙龙成为连接专业、信任与长期经营的桥梁</div>
+</footer>
+
+<script>
+// 顶部进度条
+const progress = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  progress.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+}, { passive: true });
+
+// 滚动渐入动画
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
