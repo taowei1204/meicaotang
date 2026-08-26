@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每草堂·城市会客厅 · 主理人IP打造计划</title>
+<meta name="description" content="每草堂·城市会客厅主理人IP打造计划 — 从经营一家店，升级为经营一座城市的健康关系">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   每草堂 · 主理人IP打造计划
+   Swiss Precision / IKB Klein Blue
+   设计语言复用自《每草堂商业方案展示.html》
+   ============================================================ */
+:root{
+  /* 墨绿新中式基底（清新浅色主题） */
+  --ikb:        oklch(45% 0.09 160);
+  --ikb-deep:   oklch(38% 0.09 160);
+  --ikb-ink:    oklch(28% 0.07 160);
+  --ikb-bright: oklch(56% 0.10 160);
+  --ikb-tint:   oklch(93% 0.03 150);
+
+  /* 清新浅色背景（东方米白 + 淡绿层次） */
+  --bg-0: oklch(96% 0.012 90);
+  --bg-1: oklch(94% 0.018 140);
+  --bg-2: oklch(99% 0.006 95);
+  --bg-3: oklch(90% 0.025 140);
+
+  /* 文字（深墨绿黑） */
+  --text-hi:  oklch(26% 0.04 160);
+  --text-mid: oklch(44% 0.035 160);
+  --text-low: oklch(54% 0.03 160);
+
+  /* 线条 */
+  --line: oklch(65% 0.04 155 / 0.42);
+
+  --font-display: "Archivo", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  --font-body: "Instrument Sans", "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+  --space-9: 96px; --space-10: 128px;
+  --gutter: clamp(20px, 5vw, 64px);
+  --container: 1240px;
+}
+
+*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; }
+body{
+  background: var(--bg-0);
+  color: var(--text-hi);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+::selection{ background: var(--ikb); color:#fff; }
+img{ max-width:100%; display:block; }
+
+/* ---------- 顶部进度条 ---------- */
+#progress{
+  position: fixed; top:0; left:0; height:3px; width:0%;
+  background: var(--ikb); z-index:60;
+  transition: width .1s linear;
+}
+
+/* ---------- 顶部导航 ---------- */
+.nav{
+  position: fixed; inset:0 0 auto 0; z-index:50;
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 18px var(--gutter);
+  background: color-mix(in oklch, var(--bg-0) 82%, transparent);
+  backdrop-filter: blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav .brand{ display:flex; align-items:baseline; gap:10px; }
+.nav .brand b{
+  font-family: var(--font-display); font-weight:800; font-size:1.1rem;
+  letter-spacing:.14em;
+}
+.nav .brand b em{ color:var(--ikb); font-style:normal; }
+.nav .brand span{
+  font-family: var(--font-display); font-weight:600; font-size:.62rem;
+  letter-spacing:.34em; color:var(--text-low); text-transform:uppercase;
+}
+.nav .links{ display:flex; gap:26px; }
+.nav .links a{
+  color:var(--text-mid); text-decoration:none; font-size:.8rem;
+  letter-spacing:.08em; font-weight:500; padding:6px 0; position:relative;
+  transition:color .2s;
+}
+.nav .links a::after{
+  content:""; position:absolute; left:0; bottom:0; height:2px; width:0%;
+  background:var(--ikb); transition:width .25s cubic-bezier(.22,1,.36,1);
+}
+.nav .links a:hover{ color:var(--text-hi); }
+.nav .links a:hover::after{ width:100%; }
+.nav .cta{
+  font-family:var(--font-display); font-weight:700; font-size:.78rem;
+  letter-spacing:.06em; color:#fff; text-decoration:none;
+  background:var(--ikb); padding:10px 20px; border:1px solid var(--ikb);
+  transition:background .2s, transform .2s;
+}
+.nav .cta:hover{ background:var(--ikb); transform:translateY(-1px); }
+.menu-toggle{ display:none; }
+
+/* ---------- 通用容器 ---------- */
+.wrap{ width:100%; max-width:var(--container); margin:0 auto; padding:0 var(--gutter); }
+
+/* ---------- Hero ---------- */
+.hero{
+  position:relative; min-height:100vh; display:flex; align-items:center;
+  padding: 160px 0 90px; overflow:hidden;
+}
+.hero::before{
+  content:""; position:absolute; inset:0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 88px 88px;
+  mask-image: radial-gradient(ellipse 90% 80% at 60% 40%, #000 20%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 60% 40%, #000 20%, transparent 75%);
+}
+.hero::after{
+  content:""; position:absolute; width:46vw; height:46vw; max-width:640px; max-height:640px;
+  right:-8%; top:-18%; background: var(--ikb);
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  opacity:.08;
+}
+.hero .wrap{ position:relative; z-index:2; }
+.eyebrow{
+  display:inline-flex; align-items:center; gap:12px;
+  font-family:var(--font-display); font-weight:600; font-size:.72rem;
+  letter-spacing:.32em; text-transform:uppercase; color:var(--ikb);
+  margin-bottom: var(--space-6);
+}
+.eyebrow::before{ content:""; width:44px; height:2px; background:var(--ikb); }
+.hero h1{
+  font-family:var(--font-display); font-weight:900;
+  font-size: clamp(2.9rem, 8vw, 6.4rem);
+  line-height: 1.02; letter-spacing:-.02em;
+  max-width: 16ch;
+}
+.hero h1 .blue{ color:var(--ikb); }
+.hero .sub{
+  margin-top: var(--space-6);
+  font-size: clamp(1.05rem, 2.2vw, 1.4rem);
+  color:var(--text-mid); font-weight:400; max-width: 46ch;
+  line-height:1.65;
+}
+.hero .sub b{ color:var(--text-hi); font-weight:600; }
+
+/* Hero 关键数据条 */
+.hero-stats{
+  margin-top: var(--space-8);
+  display:grid; grid-template-columns: repeat(4, 1fr);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.hero-stat{
+  padding: var(--space-5) var(--space-4); border-right:1px solid var(--line);
+}
+.hero-stat:last-child{ border-right:none; }
+.hero-stat .num{
+  font-family:var(--font-display); font-weight:800;
+  font-size: clamp(2rem, 4.5vw, 3.4rem); line-height:1;
+  color:var(--text-hi); font-variant-numeric: tabular-nums;
+}
+.hero-stat .num i{ font-style:normal; color:var(--ikb); }
+.hero-stat .lbl{
+  margin-top: var(--space-2); font-size:.74rem; letter-spacing:.14em;
+  color:var(--text-low); text-transform:uppercase;
+}
+.hero-scroll{
+  position:absolute; bottom:28px; left:var(--gutter); z-index:2;
+  font-family:var(--font-display); font-size:.66rem; letter-spacing:.34em;
+  color:var(--text-low); text-transform:uppercase;
+  display:flex; align-items:center; gap:12px;
+}
+.hero-scroll::after{
+  content:""; width:56px; height:1px; background:var(--text-low);
+  position:relative; overflow:hidden;
+}
+.hero-scroll::before{
+  content:""; position:absolute; left:68px; top:-2px; width:8px; height:5px;
+  background:var(--ikb); animation:drop 1.8s cubic-bezier(.65,0,.35,1) infinite;
+}
+@keyframes drop{ 0%{ transform:translateY(0); opacity:1;} 100%{ transform:translateY(18px); opacity:0;} }
+
+/* ---------- Section 通用 ---------- */
+section{ position:relative; }
+.sec{ padding: var(--space-10) 0; }
+.sec-head{
+  display:grid; grid-template-columns: 120px 1fr; gap: var(--space-6);
+  margin-bottom: var(--space-8); align-items:start;
+}
+.sec-no{
+  font-family:var(--font-display); font-weight:800; font-size: clamp(1.4rem,3vw,2rem);
+  color:var(--ikb); letter-spacing:.02em; line-height:1;
+  display:flex; align-items:baseline; gap:8px;
+}
+.sec-no small{
+  font-size:.7rem; font-weight:600; color:var(--text-low); letter-spacing:.28em;
+}
+.sec-title{
+  font-family:var(--font-display); font-weight:800;
+  font-size: clamp(1.7rem, 4vw, 2.9rem); line-height:1.15; letter-spacing:-.01em;
+}
+.sec-title .thin{ font-weight:400; color:var(--text-mid); }
+.sec-desc{
+  margin-top: var(--space-4); color:var(--text-mid);
+  max-width: 62ch; font-size:1.02rem;
+}
+.sec-desc b{ color:var(--text-hi); font-weight:600; }
+.alt-bg{ background:var(--bg-1); }
+
+/* ---------- 通用 Markdown 表格 ---------- */
+.md-table{ width:100%; border-collapse:collapse; }
+.md-table thead th{
+  font-family:var(--font-display); font-weight:700; font-size:.72rem;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--text-low);
+  text-align:left; padding: var(--space-4) var(--space-4);
+  border-bottom:2px solid var(--ikb);
+}
+.md-table tbody td{
+  padding: var(--space-5) var(--space-4); border-bottom:1px solid var(--line);
+  vertical-align:top; font-size:.93rem;
+}
+.md-table tbody tr{ transition:background .25s; }
+.md-table tbody tr:hover{ background:var(--bg-2); }
+.md-table td.k{
+  font-family:var(--font-display); font-weight:700; color:var(--text-hi);
+  white-space:nowrap; font-size:.98rem;
+}
+.md-table td.k em{ font-style:normal; color:var(--ikb); }
+.md-table td.c{ color:var(--text-mid); }
+.md-table td.v{ color:var(--text-hi); }
+
+/* ---------- 概述三卡 ---------- */
+.ov-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap: var(--space-5); }
+.ov-card{
+  padding: var(--space-6); background:var(--bg-2); border-top:3px solid var(--line);
+  transition: transform .3s cubic-bezier(.22,1,.36,1), border-color .3s;
+}
+.ov-card:hover{ transform:translateY(-6px); border-top-color:var(--ikb); }
+.ov-card .k{
+  font-family:var(--font-display); font-weight:800; font-size:.7rem;
+  letter-spacing:.22em; color:var(--text-low); text-transform:uppercase;
+}
+.ov-card h3{
+  font-family:var(--font-display); font-weight:700; font-size:1.22rem;
+  margin: var(--space-3) 0 var(--space-3);
+}
+.ov-card p{ color:var(--text-mid); font-size:.92rem; }
+.ov-card p b{ color:var(--text-hi); font-weight:600; }
+
+/* ---------- 垂直流程（代码块流程图） ---------- */
+.flow-vert{ display:flex; flex-direction:column; max-width:640px; }
+.flow-vert .step{
+  padding: var(--space-4) var(--space-5);
+  background:var(--bg-2); border-left:3px solid var(--ikb);
+  font-family:var(--font-display); font-weight:600; font-size:.98rem;
+  color:var(--text-hi);
+}
+.flow-vert .step em{ font-style:normal; color:var(--ikb); font-family:var(--font-display); font-weight:800; margin-right:10px; font-variant-numeric:tabular-nums; }
+.flow-vert .arrow{ color:var(--ikb); text-align:center; font-weight:800; line-height:1; padding:6px 0; font-family:var(--font-display); }
+
+/* ---------- 战略横幅 ---------- */
+.pos-banner{
+  margin-top: var(--space-7); padding: var(--space-6) var(--space-7);
+  background:var(--ikb); display:flex; align-items:center; gap: var(--space-6);
+}
+.pos-banner .big{
+  font-family:var(--font-display); font-weight:900;
+  color:#fff;
+  font-size: clamp(1.6rem,3.6vw,2.6rem); line-height:1.1; flex:1;
+}
+.pos-banner .big small{ display:block; font-weight:600; font-size:.78rem; letter-spacing:.2em; opacity:.75; margin-bottom:6px; }
+.pos-banner .line{ width:1px; align-self:stretch; background:rgba(255,255,255,.35); }
+.pos-banner .note{ flex:1; font-size:.92rem; opacity:.95; color:rgba(255,255,255,.95); }
+
+/* ---------- 大字引用（一句话定位 / 口号） ---------- */
+.bigquote{
+  position:relative; padding: var(--space-7) var(--space-8);
+  background:var(--bg-2); border-left:4px solid var(--ikb);
+  font-family:var(--font-display); font-weight:800;
+  font-size: clamp(1.3rem, 3.2vw, 2.1rem); line-height:1.5; color:var(--text-hi);
+}
+.bigquote b{ color:var(--ikb); }
+.bigquote .src{
+  display:block; margin-top: var(--space-4);
+  font-family:var(--font-display); font-weight:700; font-size:.7rem;
+  letter-spacing:.28em; color:var(--text-low); text-transform:uppercase;
+}
+
+/* ---------- 关键词卡片 ---------- */
+.kw-grid{ display:grid; grid-template-columns: repeat(5,1fr); gap: var(--space-5); }
+.kw-card{
+  padding: var(--space-6) var(--space-5); background:var(--bg-2);
+  border-top:2px solid var(--ikb); position:relative;
+  transition:transform .3s cubic-bezier(.22,1,.36,1), background .3s;
+}
+.kw-card:hover{ transform:translateY(-6px); background:var(--bg-3); }
+.kw-card .n{
+  font-family:var(--font-display); font-weight:900; font-size:1.1rem; color:var(--ikb);
+}
+.kw-card h4{ font-family:var(--font-display); font-weight:700; font-size:1.05rem; margin:8px 0 6px; }
+.kw-card p{ color:var(--text-mid); font-size:.86rem; }
+
+/* ---------- 编号要点 ---------- */
+.tips{ display:grid; grid-template-columns: repeat(2,1fr); gap:0; }
+.tip-item{
+  padding: var(--space-6) var(--space-6) var(--space-6) 0;
+  border-top:1px solid var(--line);
+  display:grid; grid-template-columns: 84px 1fr; gap: var(--space-5);
+}
+.tip-item:nth-child(odd){ padding-right: var(--space-7); }
+.tip-item .idx{
+  font-family:var(--font-display); font-weight:800; font-size:2.4rem;
+  color:transparent; -webkit-text-stroke:1px var(--ikb);
+  line-height:1; letter-spacing:.02em; font-variant-numeric: tabular-nums;
+}
+.tip-item h4{
+  font-family:var(--font-display); font-weight:700; font-size:1.05rem;
+  margin-bottom:6px;
+}
+.tip-item h4 .bar{ color:var(--ikb); margin-right:6px; }
+.tip-item p{ color:var(--text-mid); font-size:.9rem; }
+
+/* ---------- 颜色色板 ---------- */
+.palette{ display:flex; gap: var(--space-5); margin-bottom: var(--space-6); flex-wrap:wrap; }
+.palette .sw{
+  flex:1; min-width:150px; border:1px solid var(--line); background:var(--bg-2);
+}
+.palette .sw .chip{ height:88px; }
+.palette .sw .meta{ padding: var(--space-3) var(--space-4); }
+.palette .sw .meta b{ display:block; font-family:var(--font-display); font-weight:700; font-size:.9rem; }
+.palette .sw .meta code{
+  font-family:var(--font-display); font-size:.72rem; letter-spacing:.06em; color:var(--text-low);
+}
+
+/* ---------- 阶段卡片（90天） ---------- */
+.phase-stack{ display:grid; gap: var(--space-6); }
+.phase-card{
+  display:grid; grid-template-columns: 200px 1fr; background:var(--bg-2);
+  border-left:4px solid var(--ikb);
+  transition:transform .3s cubic-bezier(.22,1,.36,1);
+}
+.phase-card:hover{ transform:translateX(8px); }
+.phase-card .ph-no{
+  font-family:var(--font-display); font-weight:900;
+  font-size: clamp(2.4rem,5vw,3.6rem); line-height:1; color:transparent;
+  -webkit-text-stroke:1px var(--ikb);
+  display:flex; align-items:flex-start; padding: var(--space-6);
+}
+.phase-card .ph-body{ padding: var(--space-6) var(--space-6) var(--space-6) 0; }
+.phase-card .ph-days{
+  font-family:var(--font-display); font-weight:700; font-size:.72rem;
+  letter-spacing:.26em; color:var(--ikb); text-transform:uppercase;
+}
+.phase-card h3{ font-family:var(--font-display); font-weight:800; font-size:1.5rem; margin:8px 0 6px; }
+.phase-card .goal{ font-size:.9rem; color:var(--text-hi); font-weight:600; margin-bottom: var(--space-3); }
+.phase-card .goal b{ color:var(--ikb); }
+.phase-card ul{ list-style:none; display:grid; gap:8px; }
+.phase-card ul li{
+  position:relative; padding-left:22px; color:var(--text-mid); font-size:.9rem;
+}
+.phase-card ul li::before{
+  content:"—"; position:absolute; left:0; top:0; color:var(--ikb); font-weight:700;
+}
+
+/* ---------- 原则列表（16章） ---------- */
+.prin-list{ display:grid; gap: var(--space-5); counter-reset:prin; }
+.prin{
+  display:grid; grid-template-columns: 120px 1fr; gap: var(--space-6);
+  padding: var(--space-5) 0; border-top:1px solid var(--line); align-items:center;
+}
+.prin .n{
+  font-family:var(--font-display); font-weight:900; font-size:2.2rem; line-height:1;
+  color:transparent; -webkit-text-stroke:1px var(--ikb); font-variant-numeric:tabular-nums;
+}
+.prin p{ font-family:var(--font-display); font-weight:700; font-size:clamp(1.05rem,2.2vw,1.4rem); color:var(--text-hi); }
+.prin p b{ color:var(--ikb); }
+
+/* ---------- 结语 ---------- */
+.closing{
+  position:relative; padding: var(--space-10) 0; text-align:center; overflow:hidden;
+}
+.closing::before{
+  content:""; position:absolute; inset:0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size:88px 88px; opacity:.5;
+}
+.closing::after{
+  content:""; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  width:620px; height:620px; border:1px solid var(--line); border-radius:50%;
+  box-shadow: 0 0 0 60px rgba(36,54,41,.08), 0 0 0 120px rgba(36,54,41,.045);
+}
+.closing .wrap{ position:relative; z-index:2; }
+.closing .eyebrow{ justify-content:center; }
+.closing .eyebrow::before{ display:none; }
+.closing h2{
+  font-family:var(--font-display); font-weight:900;
+  font-size: clamp(1.9rem, 5vw, 3.6rem); line-height:1.3;
+  max-width:26ch; margin:0 auto; color:var(--text-hi);
+}
+.closing h2 b{ color:var(--ikb); }
+.closing .slogan{
+  margin-top: var(--space-8); display:inline-block;
+  font-family:var(--font-display); font-weight:800;
+  font-size: clamp(1.1rem,2.6vw,1.7rem); letter-spacing:.04em;
+  color:var(--text-hi); padding: var(--space-5) var(--space-7);
+  border:1px solid var(--ikb);
+}
+.closing .slogan b{ color:var(--ikb); }
+
+/* ---------- Footer ---------- */
+footer{
+  border-top:1px solid var(--line); padding: var(--space-7) 0 var(--space-8);
+  display:flex; justify-content:space-between; align-items:flex-start; gap: var(--space-6);
+}
+footer .fb{ font-family:var(--font-display); font-weight:800; letter-spacing:.14em; }
+footer .fb em{ color:var(--ikb); font-style:normal; }
+footer .fb small{ display:block; font-weight:600; font-size:.6rem; letter-spacing:.3em; color:var(--text-low); margin-top:4px; }
+footer .fl{ color:var(--text-low); font-size:.78rem; text-align:right; line-height:2; }
+
+/* ---------- 滚动动画 ---------- */
+.reveal{ opacity:0; transform: translateY(34px); transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1); }
+.reveal.in{ opacity:1; transform:none; }
+.reveal.d1{ transition-delay:.08s; } .reveal.d2{ transition-delay:.16s; }
+.reveal.d3{ transition-delay:.24s; } .reveal.d4{ transition-delay:.32s; }
+@media (prefers-reduced-motion: reduce){
+  .reveal{ opacity:1; transform:none; transition:none; }
+  html{ scroll-behavior:auto; }
+  .hero-scroll::before{ animation:none; }
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 1024px){
+  .nav .links{ display:none; }
+  .ov-grid{ grid-template-columns:1fr; }
+  .kw-grid{ grid-template-columns:repeat(3,1fr); }
+  .phase-card{ grid-template-columns:1fr; }
+  .phase-card .ph-body{ padding-left: var(--space-6); }
+}
+@media (max-width: 720px){
+  .hero{ padding-top:130px; }
+  .hero-stats{ grid-template-columns:repeat(2,1fr); }
+  .hero-stat:nth-child(2){ border-right:none; }
+  .hero-stat:nth-child(1),.hero-stat:nth-child(2){ border-bottom:1px solid var(--line); }
+  .hero-stat:nth-child(3){ border-bottom:1px solid var(--line); }
+  .sec-head{ grid-template-columns:1fr; gap: var(--space-3); }
+  .tips{ grid-template-columns:1fr; }
+  .tip-item:nth-child(odd){ padding-right:0; }
+  .kw-grid{ grid-template-columns:repeat(2,1fr); }
+  .pos-banner{ flex-direction:column; align-items:flex-start; gap: var(--space-4); }
+  .pos-banner .line{ width:100%; height:1px; }
+  .prin{ grid-template-columns:72px 1fr; gap: var(--space-4); }
+  .md-table thead{ display:none; }
+  .md-table, .md-table tbody, .md-table tr, .md-table td{ display:block; width:100%; }
+  .md-table tbody tr{ padding: var(--space-4) 0; border-bottom:1px solid var(--line); }
+  .md-table tbody td{ border:none; padding: var(--space-2) 0; }
+  .md-table td.k{ font-size:1.05rem; }
+  .md-table td.c::before{ content:""; display:block; color:var(--text-low); font-size:.72rem; }
+  footer{ flex-direction:column; }
+  footer .fl{ text-align:left; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<!-- ================= 导航 ================= -->
+<header class="nav">
+  <div class="brand">
+    <b>每<em>草</em>堂·城市会客厅</b>
+    <span>MEI CAO TANG · CITY SALON</span>
+  </div>
+  <nav class="links">
+    <a href="#bg">IP战略</a>
+    <a href="#position">定位人设</a>
+    <a href="#ability">能力模型</a>
+    <a href="#content">内容IP</a>
+    <a href="#salon">沙龙社群</a>
+    <a href="#loop">商业闭环</a>
+    <a href="#grow">成长路径</a>
+    <a href="#plan90">90天计划</a>
+  </nav>
+  <a class="cta" href="#principle">执行原则</a>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow reveal in">主理人IP打造计划 · 招商 / 培训 / 内部执行通用版 2026</div>
+    <h1 class="reveal in d1">从<span class="blue">经营一家店</span><br>升级为经营一座城市的<br>健康关系</h1>
+    <p class="sub reveal in d2">
+      面向营养师、健康顾问、养生门店经营者、私域创业者等大健康从业者，以
+      <b>城市健康生活方式主理人</b> 为IP定位，
+      提供「线下空间 + 产品体系 + 健康服务 + 数字工具 + 社群运营」的服务营销模式。
+    </p>
+    <div class="hero-stats reveal in d3">
+      <div class="hero-stat"><div class="num">4<i>重</i></div><div class="lbl">主理人身份</div></div>
+      <div class="hero-stat"><div class="num">5<i>大</i></div><div class="lbl">固定内容栏目</div></div>
+      <div class="hero-stat"><div class="num">5<i>力</i></div><div class="lbl">能力模型</div></div>
+      <div class="hero-stat"><div class="num">90<i>天</i></div><div class="lbl">落地计划</div></div>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ================= 01 项目背景与IP战略 ================= -->
+<section id="bg" class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">01<small>/ IP战略</small></div>
+      <div>
+        <h2 class="sec-title">项目背景与IP战略<br><span class="thin">品牌解决「做什么」，主理人解决「为什么相信你」</span></h2>
+      </div>
+    </div>
+    <div class="ov-grid">
+      <div class="ov-card reveal">
+        <div class="k">01 · 项目基础</div>
+        <h3>以空间与体验建立连接</h3>
+        <p>每草堂以<b>药食同源文化</b>为精神内核，以<b>酶基中式茶饮</b>为低门槛体验入口，以<b>主题沙龙</b>为用户连接和信任建立机制，以<b>酶基食品营养方案及长期健康服务</b>承接用户价值，并通过<b>小程序</b>完成会员、商城、服务记录与传播协同。</p>
+      </div>
+      <div class="ov-card reveal d1">
+        <div class="k">02 · 行业问题</div>
+        <h3>告别「产品介绍—一次交易」</h3>
+        <p>传统健康生意常停留在产品介绍与一次交易的路径，普遍面临<b>获客成本高、信任建立慢、复购缺乏服务支撑、从业者专业形象不足</b>等问题。</p>
+        <p>每草堂的答案是：<b>不以推销为起点，而以内容、空间、体验与陪伴经营用户关系。</b></p>
+      </div>
+      <div class="ov-card reveal d2">
+        <div class="k">03 · IP战略</div>
+        <h3>主理人是信任入口</h3>
+        <p>主理人是城市会客厅最重要的<b>信任入口</b>和<b>运营发动机</b>。品牌标准化解决「做什么」，主理人IP解决「为什么相信你、为什么愿意持续跟随你」。</p>
+      </div>
+    </div>
+    <div class="sec-head reveal" style="margin-top:var(--space-8); margin-bottom:var(--space-6);">
+      <div class="sec-no" style="font-size:clamp(1.1rem,2vw,1.4rem);">→</div>
+      <div>
+        <h3 style="font-family:var(--font-display);font-weight:700;font-size:1.2rem;">主理人 IP 信任链路</h3>
+      </div>
+    </div>
+    <div class="flow-vert reveal">
+      <div class="step"><em>01</em>主理人表达价值观</div>
+      <div class="arrow">↓</div>
+      <div class="step"><em>02</em>内容传递健康认知</div>
+      <div class="arrow">↓</div>
+      <div class="step"><em>03</em>活动创造真实相遇</div>
+      <div class="arrow">↓</div>
+      <div class="step"><em>04</em>服务建立个人信任</div>
+      <div class="arrow">↓</div>
+      <div class="step"><em>05</em>方案带来持续价值</div>
+      <div class="arrow">↓</div>
+      <div class="step"><em>06</em>会员复购与口碑推荐</div>
+    </div>
+    <div class="pos-banner reveal">
+      <div class="big">
+        <small>IP STRATEGY GOAL</small>
+        战略目标<br>培养城市健康生活意见领袖
+      </div>
+      <div class="line"></div>
+      <div class="note">将主理人从产品销售者，培养为兼具<b style="color:#fff;">健康认知、生活审美、组织能力和用户经营能力</b>的城市健康生活意见领袖。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 02 主理人定位与人设画像 ================= -->
+<section id="position" class="sec alt-bg">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">02<small>/ 定位</small></div>
+      <div>
+        <h2 class="sec-title">主理人定位<br><span class="thin">与人设画像</span></h2>
+      </div>
+    </div>
+    <div class="bigquote reveal">
+      「我不是卖健康产品的人，<b>我是在城市里经营健康生活方式的人。</b>」
+      <span class="src">每草堂健康生活主理人 · 一句话定位</span>
+    </div>
+    <div class="sec-head reveal" style="margin-top:var(--space-8); margin-bottom:var(--space-6);">
+      <div class="sec-no" style="font-size:clamp(1.1rem,2vw,1.4rem);">→</div>
+      <div>
+        <h3 style="font-family:var(--font-display);font-weight:700;font-size:1.2rem;">四重身份：用户感知 × 核心工作</h3>
+      </div>
+    </div>
+    <table class="md-table reveal">
+      <thead><tr><th>身份</th><th>用户感知</th><th>核心工作</th></tr></thead>
+      <tbody>
+        <tr><td class="k">健康生活方式倡导者</td><td class="c">懂健康，也懂日常生活</td><td class="v">输出可实践的生活方式内容</td></tr>
+        <tr><td class="k">药食同源文化传播者</td><td class="c">有东方健康审美与文化底蕴</td><td class="v">让传统养生智慧更易理解</td></tr>
+        <tr><td class="k">家庭健康陪伴者</td><td class="c">不急于成交，愿意长期服务</td><td class="v">建档、回访、提醒、陪伴</td></tr>
+        <tr><td class="k">城市会客厅组织者</td><td class="c">能把同频的人聚在一起</td><td class="v">策划活动、连接社群、创造关系</td></tr>
+      </tbody>
+    </table>
+    <div class="sec-head reveal" style="margin-top:var(--space-8); margin-bottom:var(--space-6);">
+      <div class="sec-no" style="font-size:clamp(1.1rem,2vw,1.4rem);">→</div>
+      <div>
+        <h3 style="font-family:var(--font-display);font-weight:700;font-size:1.2rem;">人设关键词：五个「有」</h3>
+      </div>
+    </div>
+    <div class="kw-grid">
+      <div class="kw-card reveal"><div class="n">有温度</div><h4>伙伴式沟通</h4><p>用伙伴式沟通替代生硬推销。</p></div>
+      <div class="kw-card reveal d1"><div class="n">有专业</div><h4>专业边界清晰</h4><p>掌握药食同源、基础营养、健康生活方式及服务边界。</p></div>
+      <div class="kw-card reveal d2"><div class="n">有品位</div><h4>东方健康美学</h4><p>代表自然、克制、东方、松弛的健康美学。</p></div>
+      <div class="kw-card reveal d3"><div class="n">有连接</div><h4>链接人与资源</h4><p>善于倾听、组织活动、链接人和资源。</p></div>
+      <div class="kw-card reveal d4"><div class="n">有行动</div><h4>持续成长</h4><p>每天输出、服务用户、复盘数据、持续成长。</p></div>
+    </div>
+    <div class="ov-grid" style="margin-top:var(--space-7);">
+      <div class="ov-card reveal">
+        <div class="k">形象边界</div>
+        <h3>专业可信，比「神奇话术」更有长期价值</h3>
+        <p>主理人应做<b>健康生活倡导与日常营养服务</b>，不夸大功能、不替代医疗诊断、不承诺疗效；涉及疾病、用药、孕产、未成年人及严重不适时，建议用户咨询持证医务人员。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 03 主理人核心价值与能力模型 ================= -->
+<section id="ability" class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">03<small>/ 能力</small></div>
+      <div>
+        <h2 class="sec-title">核心价值与能力模型<br><span class="thin">五力合一，让主理人真正立得住</span></h2>
+      </div>
+    </div>
+    <div class="ov-grid">
+      <div class="ov-card reveal">
+        <div class="k">核心价值</div>
+        <h3>对用户的价值</h3>
+        <p>1 · 提供易懂、可坚持的健康生活建议。</p>
+        <p>2 · 提供有温度的城市健康社交场景。</p>
+        <p>3 · 协助用户建立健康档案与周期性行动计划。</p>
+        <p>4 · 通过产品体验、课程和陪伴，帮助用户形成更稳定的健康习惯。</p>
+      </div>
+    </div>
+    <div class="sec-head reveal" style="margin-top:var(--space-8); margin-bottom:var(--space-6);">
+      <div class="sec-no" style="font-size:clamp(1.1rem,2vw,1.4rem);">→</div>
+      <div>
+        <h3 style="font-family:var(--font-display);font-weight:700;font-size:1.2rem;">能力模型：五力合一</h3>
+      </div>
+    </div>
+    <table class="md-table reveal">
+      <thead><tr><th>能力</th><th>具体表现</th><th>训练重点</th></tr></thead>
+      <tbody>
+        <tr><td class="k">专业力</td><td class="c">能讲清基础健康知识与服务边界</td><td class="v">产品、营养、药食同源、健康问询</td></tr>
+        <tr><td class="k">内容力</td><td class="c">将专业表达为真实、简洁的日常内容</td><td class="v">选题、拍摄、文案、案例表达</td></tr>
+        <tr><td class="k">组织力</td><td class="c">能稳定组织活动并掌控现场体验</td><td class="v">流程、主持、邀约、现场转化</td></tr>
+        <tr><td class="k">服务力</td><td class="c">能建档、回访、跟进并维护信任</td><td class="v">用户分层、记录、提醒、复盘</td></tr>
+        <tr><td class="k">经营力</td><td class="c">能看懂漏斗、复购和活动效率</td><td class="v">目标拆解、数据管理、利润意识</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================= 04 内容IP矩阵与五大固定栏目 ================= -->
+<section id="content" class="sec alt-bg">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">04<small>/ 内容IP</small></div>
+      <div>
+        <h2 class="sec-title">内容IP矩阵<br><span class="thin">与五大固定栏目</span></h2>
+      </div>
+    </div>
+    <table class="md-table reveal">
+      <thead><tr><th>内容层</th><th>目标</th><th>推荐形式</th></tr></thead>
+      <tbody>
+        <tr><td class="k">健康生活内容</td><td class="c">吸引关注、降低认知门槛</td><td class="v">短视频、图文、朋友圈</td></tr>
+        <tr><td class="k">会客厅现场内容</td><td class="c">展示空间温度与真实关系</td><td class="v">活动花絮、人物故事、直播切片</td></tr>
+        <tr><td class="k">专业服务内容</td><td class="c">建立可信度</td><td class="v">健康课堂、问答、工具清单</td></tr>
+        <tr><td class="k">用户故事内容</td><td class="c">形成社会证明</td><td class="v">经授权的访谈、体验记录、感谢反馈</td></tr>
+        <tr><td class="k">主理人成长内容</td><td class="c">建立人格信任</td><td class="v">创业日记、学习复盘、日常工作记录</td></tr>
+      </tbody>
+    </table>
+    <div class="sec-head reveal" style="margin-top:var(--space-8); margin-bottom:var(--space-6);">
+      <div class="sec-no" style="font-size:clamp(1.1rem,2vw,1.4rem);">→</div>
+      <div>
+        <h3 style="font-family:var(--font-display);font-weight:700;font-size:1.2rem;">五大固定栏目</h3>
+      </div>
+    </div>
+    <table class="md-table reveal">
+      <thead><tr><th>栏目</th><th>定位</th><th>内容示例</th><th>建议频率</th></tr></thead>
+      <tbody>
+        <tr><td class="k">《一杯茶的健康时间》</td><td class="c">茶饮入口IP</td><td class="v">今天为什么喝这杯茶；一杯茶的待客哲学</td><td class="v">每日 / 每周3次</td></tr>
+        <tr><td class="k">《城市健康会客厅》</td><td class="c">空间与关系IP</td><td class="v">今天会客厅来了谁；活动片段；一场对话</td><td class="v">每周2次</td></tr>
+        <tr><td class="k">《100个家庭健康故事》</td><td class="c">信任IP</td><td class="v">经用户同意的生活方式改变与服务故事</td><td class="v">每周1次</td></tr>
+        <tr><td class="k">《主理人健康课堂》</td><td class="c">专业IP</td><td class="v">家庭营养、睡眠、饮食节律、情绪管理</td><td class="v">每周1次</td></tr>
+        <tr><td class="k">《健康生活方式实验室》</td><td class="c">创新与互动IP</td><td class="v">7天早睡挑战、家庭饮水打卡、轻食实践</td><td class="v">每月1个主题</td></tr>
+      </tbody>
+    </table>
+    <div class="sec-head reveal" style="margin-top:var(--space-8); margin-bottom:var(--space-6);">
+      <div class="sec-no" style="font-size:clamp(1.1rem,2vw,1.4rem);">→</div>
+      <div>
+        <h3 style="font-family:var(--font-display);font-weight:700;font-size:1.2rem;">内容表达原则</h3>
+      </div>
+    </div>
+    <div class="tips">
+      <div class="tip-item reveal"><div class="idx">01</div><div><h4><span class="bar">—</span>一条内容一个观点</h4><p>避免「知识堆砌」。</p></div></div>
+      <div class="tip-item reveal"><div class="idx">02</div><div><h4><span class="bar">—</span>真实胜过硬广</h4><p>多拍真实人物、真实空间、真实互动，少用硬广海报。</p></div></div>
+      <div class="tip-item reveal"><div class="idx">03</div><div><h4><span class="bar">—</span>先方法，后入口</h4><p>先分享经验和方法，再自然说明体验与服务入口。</p></div></div>
+      <div class="tip-item reveal"><div class="idx">04</div><div><h4><span class="bar">—</span>授权与隐私</h4><p>用户故事必须取得授权，并保护隐私。</p></div></div>
+      <div class="tip-item reveal"><div class="idx">05</div><div><h4><span class="bar">—</span>克制合规表述</h4><p>统一使用「体验、建议、陪伴、计划」等表述，避免治疗和功效承诺。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 05 沙龙与社群运营体系 ================= -->
+<section id="salon" class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">05<small>/ 沙龙社群</small></div>
+      <div>
+        <h2 class="sec-title">沙龙与社群运营体系<br><span class="thin">活动产生关系，关系产生信任，信任推动长期服务</span></h2>
+      </div>
+    </div>
+    <div class="bigquote reveal">
+      沙龙不是一次促销会，而是城市会客厅持续获客、建立信任、教育用户和激活社群的<b>核心场景</b>。
+      <span class="src">活动产生关系 → 关系产生信任 → 信任推动长期服务</span>
+    </div>
+    <div class="sec-head reveal" style="margin-top:var(--space-8); margin-bottom:var(--space-6);">
+      <div class="sec-no" style="font-size:clamp(1.1rem,2vw,1.4rem);">→</div>
+      <div>
+        <h3 style="font-family:var(--font-display);font-weight:700;font-size:1.2rem;">主题活动矩阵</h3>
+      </div>
+    </div>
+    <table class="md-table reveal">
+      <thead><tr><th>类型</th><th>主题方向</th><th>目的</th></tr></thead>
+      <tbody>
+        <tr><td class="k">健康公开课</td><td class="c">睡眠、饮食、压力、家庭营养</td><td class="v">建立专业认知</td></tr>
+        <tr><td class="k">药食同源体验</td><td class="c">节气茶饮、食材故事、东方养生</td><td class="v">提供文化与体验记忆</td></tr>
+        <tr><td class="k">家庭健康课堂</td><td class="c">儿童饮食、长者陪伴、家庭餐桌</td><td class="v">进入家庭场景</td></tr>
+        <tr><td class="k">女性健康下午茶</td><td class="c">自我关怀、轻养生、情绪管理</td><td class="v">建立高黏性社群</td></tr>
+        <tr><td class="k">生活方式社交</td><td class="c">读书会、轻运动、花艺、茶会</td><td class="v">扩大同频圈层</td></tr>
+        <tr><td class="k">企业健康活动</td><td class="c">午间健康课、员工关怀、主题体验</td><td class="v">开拓B端合作</td></tr>
+      </tbody>
+    </table>
+    <div class="sec-head reveal" style="margin-top:var(--space-8); margin-bottom:var(--space-6);">
+      <div class="sec-no" style="font-size:clamp(1.1rem,2vw,1.4rem);">→</div>
+      <div>
+        <h3 style="font-family:var(--font-display);font-weight:700;font-size:1.2rem;">单场活动标准流程</h3>
+      </div>
+    </div>
+    <table class="md-table reveal">
+      <thead><tr><th>阶段</th><th>关键动作</th></tr></thead>
+      <tbody>
+        <tr><td class="k">活动前7天</td><td class="v">确定主题、海报、报名表、邀约名单、社群预热</td></tr>
+        <tr><td class="k">活动前1天</td><td class="v">二次确认、准备茶饮/物料、分工与签到表</td></tr>
+        <tr><td class="k">活动当天</td><td class="v">签到破冰 → 茶饮体验 → 主题分享 → 互动交流 → 服务邀约</td></tr>
+        <tr><td class="k">活动后24小时</td><td class="v">感谢触达、发送照片/资料、收集反馈、识别意向</td></tr>
+        <tr><td class="k">活动后7天</td><td class="v">一对一回访、体验/检测预约、社群持续答疑</td></tr>
+      </tbody>
+    </table>
+    <div class="sec-head reveal" style="margin-top:var(--space-8); margin-bottom:var(--space-6);">
+      <div class="sec-no" style="font-size:clamp(1.1rem,2vw,1.4rem);">→</div>
+      <div>
+        <h3 style="font-family:var(--font-display);font-weight:700;font-size:1.2rem;">社群运营节奏</h3>
+      </div>
+    </div>
+    <div class="kw-grid">
+      <div class="kw-card reveal"><div class="n">每日</div><h4>轻量连接</h4><p>1条轻量健康内容或互动问题。</p></div>
+      <div class="kw-card reveal d1"><div class="n">每周</div><h4>稳定输出</h4><p>1次主题分享、1次活动招募、1次用户反馈。</p></div>
+      <div class="kw-card reveal d2"><div class="n">每月</div><h4>主题运营</h4><p>1个打卡挑战或社群主题月。</p></div>
+      <div class="kw-card reveal d3"><div class="n">每季</div><h4>关系升级</h4><p>会员答谢会、家庭健康日或跨界联名活动。</p></div>
+      <div class="kw-card reveal d4"><div class="n">目标</div><h4>有用·有温度·有参与</h4><p>社群的目标不是刷屏，而是保持「有用、有温度、有参与感」的稳定连接。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 06 线上线下商业闭环 ================= -->
+<section id="loop" class="sec alt-bg">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">06<small>/ 商业闭环</small></div>
+      <div>
+        <h2 class="sec-title">线上线下商业闭环<br><span class="thin">从内容触达，到家庭扩散</span></h2>
+      </div>
+    </div>
+    <div class="flow-vert reveal">
+      <div class="step"><em>01</em>内容触达 / 老会员推荐 / 异业合作</div>
+      <div class="arrow">↓</div>
+      <div class="step"><em>02</em>到店喝茶、参加沙龙、线上报名</div>
+      <div class="arrow">↓</div>
+      <div class="step"><em>03</em>建立基础档案与兴趣标签</div>
+      <div class="arrow">↓</div>
+      <div class="step"><em>04</em>体验服务、健康交流与方案沟通</div>
+      <div class="arrow">↓</div>
+      <div class="step"><em>05</em>茶饮复购 / 周期营养方案 / 年度会员</div>
+      <div class="arrow">↓</div>
+      <div class="step"><em>06</em>回访、活动、社群、积分与推荐</div>
+      <div class="arrow">↓</div>
+      <div class="step"><em>07</em>持续复购与家庭/朋友扩散</div>
+    </div>
+    <div class="sec-head reveal" style="margin-top:var(--space-8); margin-bottom:var(--space-6);">
+      <div class="sec-no" style="font-size:clamp(1.1rem,2vw,1.4rem);">→</div>
+      <div>
+        <h3 style="font-family:var(--font-display);font-weight:700;font-size:1.2rem;">产品与服务分工</h3>
+      </div>
+    </div>
+    <table class="md-table reveal">
+      <thead><tr><th>层级</th><th>代表内容</th><th>经营任务</th></tr></thead>
+      <tbody>
+        <tr><td class="k">引流体验</td><td class="c">酶基中式茶饮、公开课、体验活动</td><td class="v">降低首次接触门槛</td></tr>
+        <tr><td class="k">信任服务</td><td class="c">健康问询、档案、咨询、社群陪伴</td><td class="v">了解需求，建立关系</td></tr>
+        <tr><td class="k">方案成交</td><td class="c">周期营养支持、健康管理会员</td><td class="v">形成清晰服务方案</td></tr>
+        <tr><td class="k">长期复购</td><td class="c">产品补给、复访、会员活动、家庭服务</td><td class="v">延长用户生命周期</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ================= 07 用户关系分层与转化复购逻辑 ================= -->
+<section id="layer" class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">07<small>/ 用户分层</small></div>
+      <div>
+        <h2 class="sec-title">用户关系分层<br><span class="thin">与转化复购逻辑</span></h2>
+      </div>
+    </div>
+    <table class="md-table reveal">
+      <thead><tr><th>层级</th><th>用户状态</th><th>核心动作</th><th>目标</th></tr></thead>
+      <tbody>
+        <tr><td class="k">体验用户</td><td class="c">喝茶、围观内容、首次到店</td><td class="v">记录偏好，邀请参与活动</td><td class="v">完成第二次互动</td></tr>
+        <tr><td class="k">社群用户</td><td class="c">已入群、参加过活动</td><td class="v">内容陪伴、主题打卡、预约体验</td><td class="v">建立档案与信任</td></tr>
+        <tr><td class="k">健康会员</td><td class="c">已接受周期服务/方案</td><td class="v">定期回访、调整建议、专属活动</td><td class="v">稳定复购与满意度</td></tr>
+        <tr><td class="k">家庭健康客户</td><td class="c">服务对象延伸至家人</td><td class="v">家庭档案、节日关怀、家庭课堂</td><td class="v">提升客单与留存</td></tr>
+        <tr><td class="k">城市健康伙伴</td><td class="c">愿意推荐和共创</td><td class="v">邀请奖励、共创活动、口碑故事</td><td class="v">自然转介绍与裂变</td></tr>
+      </tbody>
+    </table>
+    <div class="sec-head reveal" style="margin-top:var(--space-8); margin-bottom:var(--space-6);">
+      <div class="sec-no" style="font-size:clamp(1.1rem,2vw,1.4rem);">→</div>
+      <div>
+        <h3 style="font-family:var(--font-display);font-weight:700;font-size:1.2rem;">转化五原则</h3>
+      </div>
+    </div>
+    <div class="tips">
+      <div class="tip-item reveal"><div class="idx">01</div><div><h4><span class="bar">—</span>先需求，后推荐</h4><p>先了解生活场景、目标和困扰，再给出可选择的建议。</p></div></div>
+      <div class="tip-item reveal"><div class="idx">02</div><div><h4><span class="bar">—</span>先服务，后成交</h4><p>用体验、问询、档案和回访让价值可感知。</p></div></div>
+      <div class="tip-item reveal"><div class="idx">03</div><div><h4><span class="bar">—</span>先小承诺，后长期方案</h4><p>从茶饮、活动、体验服务逐步建立信任。</p></div></div>
+      <div class="tip-item reveal"><div class="idx">04</div><div><h4><span class="bar">—</span>先结果记录，后复购提醒</h4><p>以用户的打卡、反馈与服务进展为基础开展回访。</p></div></div>
+      <div class="tip-item reveal"><div class="idx">05</div><div><h4><span class="bar">—</span>先满意，后推荐</h4><p>推荐来自真实满意，不依赖过度激励。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 08 每日、每周、每月运营模型 ================= -->
+<section id="daily" class="sec alt-bg">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">08<small>/ 运营模型</small></div>
+      <div>
+        <h2 class="sec-title">每日 · 每周 · 每月<br><span class="thin">三层运营模型</span></h2>
+      </div>
+    </div>
+    <div class="sec-head reveal" style="margin-bottom:var(--space-6);">
+      <div class="sec-no" style="font-size:clamp(1.1rem,2vw,1.4rem);">→</div>
+      <div>
+        <h3 style="font-family:var(--font-display);font-weight:700;font-size:1.2rem;">每日模型</h3>
+      </div>
+    </div>
+    <table class="md-table reveal">
+      <thead><tr><th>时段</th><th>重点工作</th><th>最低动作</th></tr></thead>
+      <tbody>
+        <tr><td class="k">上午</td><td class="c">内容与准备</td><td class="v">发布1条内容；确认当天预约；复盘前日数据</td></tr>
+        <tr><td class="k">下午</td><td class="c">用户服务</td><td class="v">完成到店接待、问询/档案、重点用户跟进</td></tr>
+        <tr><td class="k">晚间</td><td class="c">关系经营</td><td class="v">沙龙/直播/社群互动；记录用户反馈</td></tr>
+        <tr><td class="k">收尾</td><td class="c">数据沉淀</td><td class="v">更新用户标签、服务记录、次日待办</td></tr>
+      </tbody>
+    </table>
+    <div class="sec-head reveal" style="margin-top:var(--space-8); margin-bottom:var(--space-6);">
+      <div class="sec-no" style="font-size:clamp(1.1rem,2vw,1.4rem);">→</div>
+      <div>
+        <h3 style="font-family:var(--font-display);font-weight:700;font-size:1.2rem;">每周模型</h3>
+      </div>
+    </div>
+    <div class="tips">
+      <div class="tip-item reveal"><div class="idx">01</div><div><h4><span class="bar">—</span>活动节奏</h4><p>2–3场主题活动（至少1场公开引流活动、1场会员深度活动）。</p></div></div>
+      <div class="tip-item reveal"><div class="idx">02</div><div><h4><span class="bar">—</span>内容节奏</h4><p>3–5条内容发布，覆盖知识、空间、人物和活动四类主题。</p></div></div>
+      <div class="tip-item reveal"><div class="idx">03</div><div><h4><span class="bar">—</span>用户盘点</h4><p>1次用户分层盘点与重点会员回访。</p></div></div>
+      <div class="tip-item reveal"><div class="idx">04</div><div><h4><span class="bar">—</span>团队复盘</h4><p>1次团队选题、活动与数据复盘会。</p></div></div>
+    </div>
+    <div class="sec-head reveal" style="margin-top:var(--space-8); margin-bottom:var(--space-6);">
+      <div class="sec-no" style="font-size:clamp(1.1rem,2vw,1.4rem);">→</div>
+      <div>
+        <h3 style="font-family:var(--font-display);font-weight:700;font-size:1.2rem;">每月模型</h3>
+      </div>
+    </div>
+    <div class="tips">
+      <div class="tip-item reveal"><div class="idx">01</div><div><h4><span class="bar">—</span>主题运营</h4><p>明确一个月度健康主题，例如「睡眠月」「家庭餐桌月」。</p></div></div>
+      <div class="tip-item reveal"><div class="idx">02</div><div><h4><span class="bar">—</span>关键产出</h4><p>形成1个打卡活动、1份服务案例复盘、1次会员主题日。</p></div></div>
+      <div class="tip-item reveal"><div class="idx">03</div><div><h4><span class="bar">—</span>经营看板</h4><p>输出月度经营看板：新增用户、活动、服务预约、成交、复购、转介绍。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 09 主理人成长路径 ================= -->
+<section id="grow" class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">09<small>/ 成长路径</small></div>
+      <div>
+        <h2 class="sec-title">主理人成长路径<br><span class="thin">从「陌生主理人」到「城市样板」</span></h2>
+      </div>
+    </div>
+    <table class="md-table reveal">
+      <thead><tr><th>阶段</th><th>核心目标</th><th>关键动作</th><th>阶段成果</th></tr></thead>
+      <tbody>
+        <tr><td class="k">0–3个月<br>建立标签</td><td class="c">从「陌生主理人」变为「可被识别」</td><td class="v">每日内容；每周至少1场活动；完成首批用户建档</td><td class="v">清晰人设、稳定内容节奏、种子社群</td></tr>
+        <tr><td class="k">3–12个月<br>形成影响力</td><td class="c">从「会办活动」变为「城市健康连接者」</td><td class="v">固定五大栏目；活动产品化；会员服务标准化</td><td class="v">形成会员池、用户案例与口碑推荐</td></tr>
+        <tr><td class="k">1–3年<br>成为城市样板</td><td class="c">从「个人IP」变为「本地健康生活方式品牌」</td><td class="v">培养助理/讲师；跨界合作；复制运营SOP</td><td class="v">可复制会客厅模型与区域影响力</td></tr>
+      </tbody>
+    </table>
+    <div class="ov-grid" style="margin-top:var(--space-7);">
+      <div class="ov-card reveal">
+        <div class="k">建议目标 · 可按城市体量调整</div>
+        <h3>优先追求有效用户、服务质量与复购质量</h3>
+        <p>0–3个月建立首批 <b>100–300名</b> 有效社交触点；3–12个月形成稳定会员及活动机制；1–3年打造可被复制的主理人团队与城市合作网络。</p>
+        <p style="margin-top:var(--space-3);"><b>不要只追求粉丝数</b>，应优先追求有效用户、服务质量与复购质量。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 10 内容发布机制 ================= -->
+<section id="publish" class="sec alt-bg">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">10<small>/ 发布机制</small></div>
+      <div>
+        <h2 class="sec-title">内容发布机制<br><span class="thin">周排期 × 发布SOP</span></h2>
+      </div>
+    </div>
+    <table class="md-table reveal">
+      <thead><tr><th>星期</th><th>内容主题</th><th>形式</th><th>转化动作</th></tr></thead>
+      <tbody>
+        <tr><td class="k">周一</td><td class="c">主理人健康观点</td><td class="v">短视频/图文</td><td class="v">评论互动</td></tr>
+        <tr><td class="k">周二</td><td class="c">一杯茶的健康时间</td><td class="v">朋友圈/短视频</td><td class="v">到店体验预约</td></tr>
+        <tr><td class="k">周三</td><td class="c">健康课堂</td><td class="v">图文/直播切片</td><td class="v">沙龙报名</td></tr>
+        <tr><td class="k">周四</td><td class="c">会客厅故事</td><td class="v">照片/人物访谈</td><td class="v">社群加入</td></tr>
+        <tr><td class="k">周五</td><td class="c">活动预告</td><td class="v">海报/视频</td><td class="v">限额报名</td></tr>
+        <tr><td class="k">周末</td><td class="c">活动现场与复盘</td><td class="v">照片/视频</td><td class="v">下场活动或一对一服务</td></tr>
+      </tbody>
+    </table>
+    <div class="sec-head reveal" style="margin-top:var(--space-8); margin-bottom:var(--space-6);">
+      <div class="sec-no" style="font-size:clamp(1.1rem,2vw,1.4rem);">→</div>
+      <div>
+        <h3 style="font-family:var(--font-display);font-weight:700;font-size:1.2rem;">发布 SOP · 五步</h3>
+      </div>
+    </div>
+    <div class="tips">
+      <div class="tip-item reveal"><div class="idx">01</div><div><h4><span class="bar">—</span>选题来源</h4><p>选题来自用户高频问题、活动现场和日常服务记录。</p></div></div>
+      <div class="tip-item reveal"><div class="idx">02</div><div><h4><span class="bar">—</span>发布前检查</h4><p>内容发布前进行事实、健康表述和肖像授权检查。</p></div></div>
+      <div class="tip-item reveal"><div class="idx">03</div><div><h4><span class="bar">—</span>明确下一步</h4><p>每条内容设置一个明确但自然的下一步动作：留言、报名、到店、预约或入群。</p></div></div>
+      <div class="tip-item reveal"><div class="idx">04</div><div><h4><span class="bar">—</span>24小时互动</h4><p>发布后24小时内回复重点互动，并将有效线索录入用户标签。</p></div></div>
+      <div class="tip-item reveal"><div class="idx">05</div><div><h4><span class="bar">—</span>每周复盘</h4><p>每周复盘播放/阅读、互动、报名和到店，不以单纯曝光替代经营结果。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 11 活动机制与执行清单 ================= -->
+<section id="activity" class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">11<small>/ 活动机制</small></div>
+      <div>
+        <h2 class="sec-title">活动机制与执行清单<br><span class="thin">标准活动包 × 现场四原则 × 复盘四问</span></h2>
+      </div>
+    </div>
+    <div class="ov-grid">
+      <div class="ov-card reveal">
+        <div class="k">标准活动包</div>
+        <h3>每场活动十要素</h3>
+        <p>每场活动应具备：<b>主题名称、目标用户、人数上限、报名文案、主持流程、讲义/互动卡、茶饮体验、签到表、用户授权、会后回访表和数据复盘表</b>。</p>
+      </div>
+    </div>
+    <div class="sec-head reveal" style="margin-top:var(--space-8); margin-bottom:var(--space-6);">
+      <div class="sec-no" style="font-size:clamp(1.1rem,2vw,1.4rem);">→</div>
+      <div>
+        <h3 style="font-family:var(--font-display);font-weight:700;font-size:1.2rem;">现场体验四原则</h3>
+      </div>
+    </div>
+    <div class="tips">
+      <div class="tip-item reveal"><div class="idx">01</div><div><h4><span class="bar">—</span>空间与氛围</h4><p>空间整洁、香气与音乐克制，体现东方健康美学。</p></div></div>
+      <div class="tip-item reveal"><div class="idx">02</div><div><h4><span class="bar">—</span>倾听大于灌输</h4><p>主理人多倾听、少灌输，让参与者能表达自己。</p></div></div>
+      <div class="tip-item reveal"><div class="idx">03</div><div><h4><span class="bar">—</span>被看见感</h4><p>每位新用户有明确的被看见感：称呼、偏好、后续邀约。</p></div></div>
+      <div class="tip-item reveal"><div class="idx">04</div><div><h4><span class="bar">—</span>自然收口</h4><p>不做高压成交；以预约进一步体验或服务沟通作为自然收口。</p></div></div>
+    </div>
+    <div class="sec-head reveal" style="margin-top:var(--space-8); margin-bottom:var(--space-6);">
+      <div class="sec-no" style="font-size:clamp(1.1rem,2vw,1.4rem);">→</div>
+      <div>
+        <h3 style="font-family:var(--font-display);font-weight:700;font-size:1.2rem;">会后复盘四问</h3>
+      </div>
+    </div>
+    <div class="tips">
+      <div class="tip-item reveal"><div class="idx">01</div><div><h4><span class="bar">—</span>人群</h4><p>哪类用户到场率和互动最好？</p></div></div>
+      <div class="tip-item reveal"><div class="idx">02</div><div><h4><span class="bar">—</span>环节</h4><p>哪个环节最能建立信任？</p></div></div>
+      <div class="tip-item reveal"><div class="idx">03</div><div><h4><span class="bar">—</span>服务</h4><p>哪些用户应在24小时内重点服务？</p></div></div>
+      <div class="tip-item reveal"><div class="idx">04</div><div><h4><span class="bar">—</span>迭代</h4><p>下场活动保留什么、优化什么？</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 12 考核指标与经营看板 ================= -->
+<section id="kpi" class="sec alt-bg">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">12<small>/ 考核指标</small></div>
+      <div>
+        <h2 class="sec-title">考核指标与经营看板<br><span class="thin">不只销售额，更要长期价值</span></h2>
+      </div>
+    </div>
+    <table class="md-table reveal">
+      <thead><tr><th>维度</th><th>指标</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td class="k">内容</td><td class="c">有效发布数、互动率、报名线索数</td><td class="v">看内容是否带来真实连接</td></tr>
+        <tr><td class="k">活动</td><td class="c">场次、报名数、到场率、满意度</td><td class="v">看会客厅是否有稳定活力</td></tr>
+        <tr><td class="k">服务</td><td class="c">建档数、服务预约数、回访完成率</td><td class="v">看服务是否形成流程</td></tr>
+        <tr><td class="k">转化</td><td class="c">体验转服务率、方案转化率</td><td class="v">看需求沟通是否有效</td></tr>
+        <tr><td class="k">留存</td><td class="c">30/90天复购率、会员续费率</td><td class="v">看长期价值是否成立</td></tr>
+        <tr><td class="k">口碑</td><td class="c">转介绍占比、NPS/满意度、用户故事数</td><td class="v">看信任是否可扩散</td></tr>
+      </tbody>
+    </table>
+    <div class="sec-head reveal" style="margin-top:var(--space-8); margin-bottom:var(--space-6);">
+      <div class="sec-no" style="font-size:clamp(1.1rem,2vw,1.4rem);">→</div>
+      <div>
+        <h3 style="font-family:var(--font-display);font-weight:700;font-size:1.2rem;">建议看板节奏</h3>
+      </div>
+    </div>
+    <div class="kw-grid">
+      <div class="kw-card reveal"><div class="n">日看</div><h4>即时经营</h4><p>到店、预约、内容发布、重点用户跟进。</p></div>
+      <div class="kw-card reveal d1"><div class="n">周看</div><h4>漏斗效率</h4><p>活动漏斗、服务预约、转化和社群活跃。</p></div>
+      <div class="kw-card reveal d2"><div class="n">月看</div><h4>长期价值</h4><p>新增用户、会员留存、复购、转介绍和经营效率。</p></div>
+      <div class="kw-card reveal d3"><div class="n">原则</div><h4>综合考核</h4><p>考核不应只看销售额，应同时考核服务记录、用户满意度、活动质量和长期复购。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 13 品牌视觉与传播建议 ================= -->
+<section id="brand" class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">13<small>/ 品牌传播</small></div>
+      <div>
+        <h2 class="sec-title">品牌视觉与传播建议<br><span class="thin">新中式健康美学 · 自然 · 温暖 · 专业 · 克制</span></h2>
+      </div>
+    </div>
+    <div class="sec-head reveal" style="margin-bottom:var(--space-6);">
+      <div class="sec-no" style="font-size:clamp(1.1rem,2vw,1.4rem);">→</div>
+      <div>
+        <h3 style="font-family:var(--font-display);font-weight:700;font-size:1.2rem;">视觉方向 · 主色</h3>
+      </div>
+    </div>
+    <div class="palette reveal">
+      <div class="sw"><div class="chip" style="background:#243629;"></div><div class="meta"><b>墨绿</b><code>#243629</code></div></div>
+      <div class="sw"><div class="chip" style="background:#F5F1E8; border-bottom:1px solid var(--line);"></div><div class="meta"><b>东方米白</b><code>#F5F1E8</code></div></div>
+      <div class="sw"><div class="chip" style="background:#C7A66B;"></div><div class="meta"><b>香槟金</b><code>#C7A66B</code></div></div>
+    </div>
+    <div class="tips">
+      <div class="tip-item reveal"><div class="idx">01</div><div><h4><span class="bar">—</span>空间关键词</h4><p>木质、植物、茶席、自然光、人与人交流。</p></div></div>
+      <div class="tip-item reveal"><div class="idx">02</div><div><h4><span class="bar">—</span>人物镜头</h4><p>真实主理人、微笑交流、服务细节、活动瞬间；避免夸张摆拍。</p></div></div>
+      <div class="tip-item reveal"><div class="idx">03</div><div><h4><span class="bar">—</span>多说</h4><p>健康生活方式、日常营养、长期陪伴、家庭关怀。</p></div></div>
+      <div class="tip-item reveal"><div class="idx">04</div><div><h4><span class="bar">—</span>少说</h4><p>「包治、逆转、疗效、万能、立刻见效」等夸张词。</p></div></div>
+      <div class="tip-item reveal"><div class="idx">05</div><div><h4><span class="bar">—</span>转译</h4><p>把专业内容转译为普通人愿意尝试的小行动。</p></div></div>
+    </div>
+    <div class="pos-banner reveal">
+      <div class="big">
+        <small>对外统一介绍</small>
+        城市健康生活空间
+      </div>
+      <div class="line"></div>
+      <div class="note">每草堂·城市会客厅，是以<b style="color:#fff;">药食同源文化为底色</b>、以茶饮体验和主题沙龙为连接方式的<b style="color:#fff;">城市健康生活空间</b>。主理人通过内容、活动与长期服务，陪伴用户建立更可持续的健康生活习惯。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 14 主理人口号 ================= -->
+<section id="slogan" class="sec alt-bg">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">14<small>/ 口号</small></div>
+      <div>
+        <h2 class="sec-title">主理人口号<br><span class="thin">首选 + 备选</span></h2>
+      </div>
+    </div>
+    <div class="bigquote reveal">
+      「一杯茶，一场交流，<b>一份长期健康陪伴。</b>」
+      <span class="src">首选口号 · SLOGAN</span>
+    </div>
+    <div class="sec-head reveal" style="margin-top:var(--space-8); margin-bottom:var(--space-6);">
+      <div class="sec-no" style="font-size:clamp(1.1rem,2vw,1.4rem);">→</div>
+      <div>
+        <h3 style="font-family:var(--font-display);font-weight:700;font-size:1.2rem;">备选口号</h3>
+      </div>
+    </div>
+    <div class="kw-grid">
+      <div class="kw-card reveal"><div class="n">01</div><h4>陪伴每一个家庭</h4><p>陪伴城市里的每一个家庭，找到更好的健康生活方式。</p></div>
+      <div class="kw-card reveal d1"><div class="n">02</div><h4>从一次相遇开始</h4><p>让健康，从一次相遇开始。</p></div>
+      <div class="kw-card reveal d2"><div class="n">03</div><h4>把健康过成日常</h4><p>在城市里，把健康过成一种日常。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 15 90天落地计划 ================= -->
+<section id="plan90" class="sec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">15<small>/ 90天</small></div>
+      <div>
+        <h2 class="sec-title">90天落地计划<br><span class="thin">三个阶段，从起盘到增长闭环</span></h2>
+      </div>
+    </div>
+    <div class="phase-stack">
+      <div class="phase-card reveal">
+        <div class="ph-no">01</div>
+        <div class="ph-body">
+          <div class="ph-days">Phase 1 · 0–30天</div>
+          <h3>完成定位与起盘</h3>
+          <div class="goal">目标：主理人形象上线，建立首批种子用户与运营基础</div>
+          <ul>
+            <li>完成主理人介绍、视觉头像、个人简介、统一话术与服务边界。</li>
+            <li>搭建五大栏目选题库，连续发布不少于12条基础内容。</li>
+            <li>建立用户登记、标签、活动报名、回访和复盘表。</li>
+            <li>举办2–4场小型体验沙龙，沉淀首批种子社群。</li>
+            <li>梳理茶饮体验、健康问询、会员介绍与会后回访SOP。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase-card reveal d1">
+        <div class="ph-no">02</div>
+        <div class="ph-body">
+          <div class="ph-days">Phase 2 · 31–60天</div>
+          <h3>建立活动与服务节奏</h3>
+          <div class="goal">目标：让活动常态化，让服务流程跑通</div>
+          <ul>
+            <li>保持每周2场左右活动，形成1个固定主打主题。</li>
+            <li>启动「健康生活方式实验室」月度打卡。</li>
+            <li>对已到店用户完成分层，建立重点用户一对一跟进机制。</li>
+            <li>输出首批经授权的用户故事和活动复盘内容。</li>
+            <li>每周召开一次经营复盘，优化邀约、现场和会后服务。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phase-card reveal d2">
+        <div class="ph-no">03</div>
+        <div class="ph-body">
+          <div class="ph-days">Phase 3 · 61–90天</div>
+          <h3>形成首个增长闭环</h3>
+          <div class="goal">目标：获得可复用的「内容—活动—服务—复购—推荐」模型</div>
+          <ul>
+            <li>固定活动日历、社群节奏和内容排期。</li>
+            <li>推出清晰的会员/年度健康服务说明，完成规范化沟通培训。</li>
+            <li>建立会员关怀日、复购提醒及转介绍机制。</li>
+            <li>复盘不同活动主题的到场、预约、转化与复购表现。</li>
+            <li>形成《主理人运营周报》和《单场活动复盘表》两项标准工具。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 16 最终执行原则 ================= -->
+<section id="principle" class="sec alt-bg">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-no">16<small>/ 执行原则</small></div>
+      <div>
+        <h2 class="sec-title">最终执行原则<br><span class="thin">让每一步都沉淀为下一次增长的资产</span></h2>
+      </div>
+    </div>
+    <div class="prin-list">
+      <div class="prin reveal"><div class="n">01</div><p>先成为<b>可信赖的人</b>，再成为被选择的品牌。</p></div>
+      <div class="prin reveal d1"><div class="n">02</div><p>先经营<b>真实关系</b>，再追求单次成交。</p></div>
+      <div class="prin reveal d2"><div class="n">03</div><p>先让用户感受到<b>价值</b>，再讨论产品与方案。</p></div>
+      <div class="prin reveal d3"><div class="n">04</div><p>用<b>标准化流程</b>保证体验，用主理人的温度创造差异。</p></div>
+      <div class="prin reveal d4"><div class="n">05</div><p>让每一次内容、活动与服务，都<b>沉淀为下一次增长的资产</b>。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 结语 ================= -->
+<section class="closing">
+  <div class="wrap">
+    <div class="eyebrow reveal">16 + 1 / 结语 · CLOSING</div>
+    <h2 class="reveal">每草堂打造的不是一个门店老板，<br>而是一位懂健康、懂生活、懂社交、懂服务的<br><b>城市健康生活主理人。</b></h2>
+    <div class="slogan reveal">一杯茶，一场交流，一份长期健康陪伴 —— 每<em style="font-style:normal;color:var(--ikb);">草</em>堂·城市会客厅</div>
+  </div>
+</section>
+
+<footer>
+  <div class="fb">每<em>草</em>堂·城市会客厅<small>MEI CAO TANG · CITY SALON</small></div>
+  <div class="fl">每草堂·城市会客厅主理人IP打造计划 · 招商 / 培训 / 内部执行通用版<br>© 2026 每草堂·城市会客厅 · 从经营一家店，升级为经营一座城市的健康关系</div>
+</footer>
+
+<script>
+// 顶部进度条
+const progress = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  progress.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+}, { passive: true });
+
+// 滚动渐入动画
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
